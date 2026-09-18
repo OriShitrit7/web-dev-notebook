@@ -795,3 +795,154 @@ pre code {
   .grid { grid-template-columns: 1fr; }
   .lesson-end { flex-direction: column; }
 }
+
+
+/* Rich lesson blocks — aligned with the visual language of the DS/ML dashboard */
+.box {
+  margin: 24px 0;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: var(--bg-paper);
+  box-shadow: var(--shadow-sm);
+}
+
+.box-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.box-head .icon {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.box-body {
+  padding: 22px 26px;
+}
+
+.box-body > *:last-child {
+  margin-bottom: 0;
+}
+
+.box.theory {
+  border-color: var(--blue-edge);
+}
+
+.box.theory .box-head {
+  color: var(--blue-h);
+  background: var(--blue-bg);
+}
+
+.box.theory .box-head .icon {
+  color: #fff;
+  background: var(--blue-h);
+}
+
+.box.example {
+  border-color: var(--green-edge);
+}
+
+.box.example .box-head {
+  color: var(--green-h);
+  background: var(--green-bg);
+}
+
+.box.example .box-head .icon {
+  color: #fff;
+  background: var(--green-h);
+}
+
+.box.summary {
+  border-color: #cbd5e1;
+}
+
+.box.summary .box-head {
+  color: #334155;
+  background: #f1f5f9;
+}
+
+.box.summary .box-head .icon {
+  color: #fff;
+  background: #475569;
+}
+
+.note-line {
+  margin-top: 12px;
+  color: var(--ink-mute) !important;
+  font-size: 15px;
+}
+
+.keypoint {
+  margin: 18px 0 24px;
+  padding: 14px 18px;
+  border-right: 3px solid var(--amber-h);
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--amber-bg) 0%, transparent 100%);
+  color: #78350f;
+}
+
+.keypoint::before {
+  content: '💡 ';
+  margin-left: 4px;
+  font-size: 18px;
+}
+
+.figure {
+  margin: 22px 0 30px;
+  padding: 18px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.figure img {
+  display: block;
+  width: min(760px, 100%);
+  height: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+.figure .cap {
+  margin-top: 14px;
+  color: var(--ink-mute);
+  font-size: 13px;
+  line-height: 1.55;
+  font-style: italic;
+}
+
+.markdown-body > p {
+  max-width: 850px;
+}
+
+/* Clear topic hierarchy: H2 = main topic, H3 = sub-topic */
+.markdown-body h2 {
+  margin-top: 64px;
+  font-size: 34px;
+}
+
+.markdown-body h3 {
+  margin-top: 34px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 22px;
+}
+
+.markdown-body h2 + .box,
+.markdown-body h3 + .box {
+  margin-top: 16px;
+}

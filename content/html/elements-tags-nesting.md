@@ -1,78 +1,130 @@
 # Elements, Tags & Nesting
 
-## מה לומדים בפרק הזה?
+<p class="lead">
+בפרק הזה לומדים את שלושת הרעיונות הבסיסיים שמהם HTML בנוי:
+<strong>Tags</strong>, <strong>Elements</strong> ו־<strong>Nesting</strong>.
+המטרה היא להבין את המבנה של HTML לפני שמתחילים ללמוד תגיות ספציפיות.
+</p>
 
-המטרה בפרק הזה היא להבין איך HTML בנוי, עוד לפני שלומדים את התגיות הספציפיות של השפה.
+## Tags
 
-שלושת המושגים המרכזיים הם:
-- **Tag** — התחביר שמסמן לדפדפן איזה סוג רכיב אנחנו מגדירים.
-- **Element** — הרכיב השלם שנוצר בעזרת התגיות.
-- **Nesting** — הכנסת אלמנט אחד בתוך אלמנט אחר כדי ליצור מבנה היררכי.
+<div class="box theory">
+  <div class="box-head"><span class="icon">🏷️</span>מהי Tag?</div>
+  <div class="box-body">
+    <p>
+      HTML בנוי מ־<strong>Tags</strong> — תגיות. תגית היא סימון שנכתב בין הסימנים
+      <code>&lt; &gt;</code>, ובעזרתו הדפדפן יודע איזה סוג של רכיב אנחנו מגדירים.
+    </p>
+    <p>
+      שם התגית מופיע בתוך הסוגריים הזוויתיים. לדוגמה כללית:
+      <code>&lt;tagname&gt;</code>.
+    </p>
+    <p class="note-line">
+      <code>tagname</code> הוא שם כללי לצורך ההסבר בלבד — הוא לא תג HTML אמיתי.
+    </p>
+  </div>
+</div>
 
----
+### Opening Tag
 
-# 1. Tags
+<strong>Opening Tag</strong> מסמנת את תחילת האלמנט.
 
-HTML בנוי מתגיות — **Tags**.
+הצורה הכללית היא: <code>&lt;tagname&gt;</code>
 
-תגית נכתבת בין הסימנים `< >`.
+### Closing Tag
 
-**הצורה הכללית של תגית פתיחה היא:** `<tagname>`
+ברוב האלמנטים קיימת גם <strong>Closing Tag</strong>, שמסמנת את סוף האלמנט.
 
-`tagname` הוא שם כללי לצורך ההסבר, ולא תג HTML אמיתי.
+הצורה הכללית היא: <code>&lt;/tagname&gt;</code>
 
-ברוב האלמנטים קיימת גם **תגית סגירה**.
+ההבדל הוא ה־<code>/</code> שמופיע בתחילת תגית הסגירה.
 
-**הצורה הכללית של תגית סגירה היא:** `</tagname>`
+<div class="keypoint">
+<strong>כלל בסיסי:</strong> תגית הפתיחה מתחילה את האלמנט, ותגית הסגירה מסיימת אותו.
+</div>
 
-ה־`/` הוא מה שמבדיל בין תגית פתיחה לתגית סגירה.
+## Elements
 
-כלומר:
-- `<tagname>` — Opening Tag
-- `</tagname>` — Closing Tag
+<div class="box theory">
+  <div class="box-head"><span class="icon">🧩</span>מהו Element?</div>
+  <div class="box-body">
+    <p>
+      <strong>Element</strong> הוא היחידה השלמה ב־HTML — לא רק התגית עצמה.
+    </p>
+    <p>
+      ברוב המקרים Element מורכב מ־
+      <strong>Opening Tag + Content + Closing Tag</strong>.
+    </p>
+    <p>
+      בצורה כללית: <code>&lt;tagname&gt;Content&lt;/tagname&gt;</code>
+    </p>
+  </div>
+</div>
 
-התגיות מסמנות לדפדפן היכן אלמנט מתחיל והיכן הוא מסתיים.
+### המבנה של Element
 
----
+<div class="figure">
+  <img src="assets/images/html-element-anatomy.png" alt="תרשים שמראה Opening Tag, Content, Closing Tag ואת ה-Element השלם">
+  <div class="cap">
+    האיור מפרק Element לחלקים שלו: תגית פתיחה, תוכן ותגית סגירה.
+    הדוגמה משתמשת ב־<code>&lt;h1&gt;</code> רק כדי להמחיש את המבנה — את התגית עצמה נלמד בהמשך.
+  </div>
+</div>
 
-# 2. Elements
+ההבדל החשוב הוא:
 
-**Element** הוא היחידה השלמה ב־HTML, ולא רק התגית עצמה.
+- <strong>Tag</strong> היא חלק מהתחביר של האלמנט.
+- <strong>Element</strong> הוא היחידה השלמה.
 
-ברוב המקרים Element בנוי משלושה חלקים: **Opening Tag + Content + Closing Tag**.
+כלומר, <code>&lt;tagname&gt;</code> לבדו הוא Tag, ואילו
+<code>&lt;tagname&gt;Content&lt;/tagname&gt;</code> הוא Element.
 
-הצורה הכללית היא: `<tagname>Content</tagname>`
+### Content
 
-כלומר:
-- `<tagname>` — תגית פתיחה
-- `Content` — התוכן של האלמנט
-- `</tagname>` — תגית סגירה
-
-וכל הביטוי `<tagname>Content</tagname>` הוא **Element אחד**.
-
-ההבדל החשוב הוא ש־**Tag הוא חלק מה־Element**, בעוד שה־**Element הוא היחידה השלמה**.
-
----
-
-# 3. Content
-
-ה־**Content** הוא כל מה שנמצא בין תגית הפתיחה לתגית הסגירה.
+<strong>Content</strong> הוא כל מה שנמצא בין תגית הפתיחה לתגית הסגירה.
 
 ה־Content יכול להיות:
+
 - טקסט
 - Element אחר
 - כמה Elements
 - שילוב של טקסט ו־Elements
 
-בשלב הזה חשוב רק להבין שכל מה שנמצא בין תגית הפתיחה לתגית הסגירה שייך לאותו Element.
+<div class="box example">
+  <div class="box-head"><span class="icon">💡</span>הנקודה שחשוב להבין</div>
+  <div class="box-body">
+    <p>
+      ה־Content שייך לאותו Element שבתוכו הוא נמצא.
+      אם יש Element נוסף בתוך ה־Content, אנחנו כבר נכנסים לנושא של <strong>Nesting</strong>.
+    </p>
+  </div>
+</div>
 
----
+### Void Elements
 
-# 4. Nesting
+לא כל Element בנוי בצורה <code>&lt;tagname&gt;Content&lt;/tagname&gt;</code>.
 
-HTML בנוי בצורה היררכית. כלומר, Element יכול להימצא בתוך Element אחר.
+קיימים אלמנטים שלא מכילים Content ולכן אין להם Closing Tag. הם נקראים
+<strong>Void Elements</strong>.
 
-לזה קוראים **Nesting**.
+הצורה הכללית שלהם היא פשוט: <code>&lt;tagname&gt;</code>
+
+את ה־Void Elements הספציפיים נלמד בהמשך, כשנגיע לנושאים הרלוונטיים.
+
+## Nesting
+
+<div class="box theory">
+  <div class="box-head"><span class="icon">🪆</span>מהו Nesting?</div>
+  <div class="box-body">
+    <p>
+      HTML בנוי בצורה <strong>היררכית</strong>. Element יכול להימצא בתוך Element אחר.
+      למבנה הזה קוראים <strong>Nesting</strong>.
+    </p>
+    <p>
+      כלומר, ה־Content של Element יכול להיות בעצמו Element אחר.
+    </p>
+  </div>
+</div>
 
 לדוגמה מבנית:
 
@@ -82,43 +134,23 @@ HTML בנוי בצורה היררכית. כלומר, Element יכול להימצ
 </parent>
 ```
 
-`parent` ו־`child` כאן הם רק שמות כלליים לצורך המחשת המבנה, ולא תגיות HTML אמיתיות.
+<code>parent</code> ו־<code>child</code> כאן הם שמות כלליים להמחשת המבנה, ולא תגיות HTML אמיתיות.
 
-בדוגמה הזו, האלמנט `child` נמצא בתוך האלמנט `parent`, ולכן הוא **Nested Element**.
-
-אפשר לייצג את אותו מבנה כך:
-
-```text
-parent
-└── child
-```
-
----
-
-# 5. Parent ו־Child
+### Parent, Child & Siblings
 
 כאשר Element נמצא ישירות בתוך Element אחר:
-- האלמנט החיצוני נקרא **Parent**
-- האלמנט שנמצא ישירות בתוכו נקרא **Child**
 
-לדוגמה:
+- האלמנט החיצוני נקרא <strong>Parent</strong>.
+- האלמנט שנמצא ישירות בתוכו נקרא <strong>Child</strong>.
+
+אפשר לייצג את המבנה כך:
 
 ```text
 parent
 └── child
 ```
 
-כאן `parent` הוא ה־Parent ו־`child` הוא ה־Child.
-
-המונחים האלה חשובים מאוד בהמשך גם ב־CSS וב־JavaScript.
-
----
-
-# 6. Siblings
-
-אם שני Elements נמצאים בתוך אותו Parent ובאותה רמה, הם נקראים **Siblings**.
-
-לדוגמה:
+אם כמה Elements נמצאים בתוך אותו Parent ובאותה רמה, הם נקראים <strong>Siblings</strong>:
 
 ```text
 parent
@@ -126,17 +158,14 @@ parent
 └── child B
 ```
 
-`child A` ו־`child B` הם Siblings.
+<div class="keypoint">
+<strong>Parent / Child</strong> מתארים קשר אנכי בהיררכיה.
+<strong>Siblings</strong> מתארים Elements שנמצאים זה לצד זה באותה רמה.
+</div>
 
-הם אינם נמצאים אחד בתוך השני — שניהם נמצאים ישירות בתוך אותו Parent.
+### Nesting בכמה רמות
 
----
-
-# 7. Nesting בכמה רמות
-
-Nesting יכול להיות עמוק יותר מרמה אחת.
-
-לדוגמה:
+Nesting יכול להיות עמוק יותר מרמה אחת:
 
 ```text
 A
@@ -144,20 +173,15 @@ A
     └── C
 ```
 
-כאן:
-- `B` נמצא בתוך `A`
-- `C` נמצא בתוך `B`
-- לכן `C` נמצא גם בעקיפין בתוך `A`
+כאן <code>B</code> נמצא בתוך <code>A</code>, ו־<code>C</code> נמצא בתוך <code>B</code>.
 
-דף HTML אמיתי בנוי בצורה הזו: עץ של Elements שמקוננים זה בתוך זה.
+כך למעשה בנוי דף HTML אמיתי: עץ של Elements שמקוננים זה בתוך זה.
 
----
-
-# 8. סדר הסגירה של Elements
+### סדר הסגירה של Elements
 
 כאשר מקננים Elements, חייבים לסגור אותם בסדר הנכון.
 
-הכלל הוא: **האלמנט שנפתח אחרון — נסגר ראשון.**
+הכלל הוא: <strong>האלמנט שנפתח אחרון — נסגר ראשון.</strong>
 
 מבנה תקין:
 
@@ -177,17 +201,11 @@ A
     </B>
 ```
 
-במבנה הלא תקין האלמנטים "חוצים" זה את זה, ולכן ההיררכיה נשברת.
+אפשר לחשוב על זה כמו סוגריים: <code>( [ ] )</code> תקין, ואילו <code>( [ ) ]</code> אינו תקין.
 
-אפשר לחשוב על זה כמו סוגריים: `( [ ] )` תקין, ואילו `( [ ) ]` אינו תקין.
+### Indentation
 
----
-
-# 9. Indentation
-
-**Indentation** היא הזחה של הקוד לפי רמת ה־Nesting.
-
-לדוגמה:
+<strong>Indentation</strong> היא הזחה של הקוד לפי רמת ה־Nesting.
 
 ```text
 A
@@ -195,62 +213,20 @@ A
         C
 ```
 
-ככל ש־Element נמצא עמוק יותר בתוך המבנה, נהוג להזיח אותו יותר ימינה.
+ההזחה עצמה לא יוצרת את ה־Nesting — התגיות הן שיוצרות אותו.  
+המטרה של ההזחה היא להראות בצורה ברורה את ההיררכיה ולהפוך את הקוד לקריא יותר.
 
-חשוב: ההזחה עצמה לא יוצרת את ה־Nesting. התגיות הן שיוצרות אותו. ההזחה רק הופכת את המבנה לקריא וברור יותר.
-
----
-
-# 10. Elements ללא Closing Tag
-
-לא כל Element ב־HTML בנוי בצורה `<tagname>Content</tagname>`.
-
-יש Elements שלא יכולים להכיל Content ולכן אין להם Closing Tag. הם נקראים **Void Elements**.
-
-הצורה הכללית שלהם היא פשוט `<tagname>`.
-
-את התגיות הספציפיות ששייכות לקבוצה הזו נלמד בהמשך. כרגע חשוב רק לדעת שהכלל של Opening Tag + Content + Closing Tag נכון לרוב האלמנטים, אבל לא לכולם.
-
----
-
-# 11. HTML כמבנה עץ
-
-דרך נכונה לחשוב על HTML היא כעל **Tree Structure**.
-
-לדוגמה:
-
-```text
-Root
-├── Element A
-│   ├── Element B
-│   └── Element C
-└── Element D
-```
-
-כל Element יכול:
-- להכיל תוכן
-- להכיל Elements אחרים
-- להיות Child של Element אחר
-- להיות Sibling של Elements אחרים
-
-המבנה ההיררכי הזה הוא הבסיס שעליו בנוי כל מסמך HTML.
-
----
-
-# סיכום
-
-- **Tag** — התחביר שנכתב בין `< >` ומגדיר את תחילתו או סופו של Element.
-- **Element** — היחידה השלמה: Opening Tag + Content + Closing Tag.
-- **Nesting** — מצב שבו Element נמצא בתוך Element אחר.
-- **Parent** — Element שמכיל Element אחר ישירות.
-- **Child** — Element שנמצא ישירות בתוך Parent.
-- **Sibling** — Elements שנמצאים באותה רמה ותחת אותו Parent.
-- **Void Element** — Element שלא מכיל Content ולכן אין לו Closing Tag.
-- **Indentation** — הזחה שממחישה את מבנה ה־Nesting והופכת את הקוד לקריא יותר.
-- **כלל הסגירה** — מה שנפתח אחרון, נסגר ראשון.
-
-## הרעיון המרכזי
-
-HTML אינו אוסף אקראי של תגיות. הוא בנוי כ־**מבנה היררכי של Elements**.
-
-ה־Tags הם התחביר שבעזרתו מגדירים את ה־Elements, וה־Nesting הוא הדרך שבה מחברים אותם למבנה שלם.
+<div class="box summary">
+  <div class="box-head"><span class="icon">📌</span>סיכום הפרק</div>
+  <div class="box-body">
+    <ul>
+      <li><strong>Tag</strong> — התחביר שנכתב בין <code>&lt; &gt;</code>.</li>
+      <li><strong>Element</strong> — היחידה השלמה, שבדרך כלל כוללת Opening Tag, Content ו־Closing Tag.</li>
+      <li><strong>Nesting</strong> — מצב שבו Element נמצא בתוך Element אחר.</li>
+      <li><strong>Parent</strong> — Element שמכיל Element אחר ישירות.</li>
+      <li><strong>Child</strong> — Element שנמצא ישירות בתוך Parent.</li>
+      <li><strong>Sibling</strong> — Elements שנמצאים באותה רמה ותחת אותו Parent.</li>
+      <li><strong>Void Element</strong> — Element שלא מכיל Content ולכן אין לו Closing Tag.</li>
+    </ul>
+  </div>
+</div>
