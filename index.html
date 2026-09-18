@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fbf9f3">
+  <title>Web Dev Notebook</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <button class="nav-collapse-btn" id="navCollapse" type="button" title="הסתר תפריט ניווט" aria-label="הסתר תפריט ניווט">»</button>
+
+      <div class="brand"><a href="#/home">Web Dev<br>Notebook</a></div>
+      <div class="brand-sub">מחברת אינטראקטיבית ללימוד Web Development</div>
+
+      <button class="search-open" id="searchOpen" type="button" aria-label="פתיחת חיפוש">
+        ⌕&nbsp; חיפוש באתר
+        <kbd>⌘ K</kbd>
+      </button>
+
+      <div class="brand-meta">HTML · CSS · JavaScript</div>
+      <nav id="sidebarNav" aria-label="ניווט ראשי"></nav>
+    </aside>
+
+    <div class="view-host" id="viewHost" aria-live="polite"></div>
+  </div>
+
+  <button class="nav-open-btn" id="navOpen" type="button" title="הצג תפריט ניווט" aria-label="הצג תפריט ניווט">☰</button>
+
+  <div class="search-layer" id="searchLayer" hidden role="dialog" aria-modal="true" aria-label="חיפוש באתר">
+    <div class="search-dialog">
+      <div class="search-head">
+        <span aria-hidden="true">⌕</span>
+        <input class="search-input" id="searchInput" type="search" placeholder="חיפוש נושא..." autocomplete="off">
+        <button class="search-close" id="searchClose" type="button" aria-label="סגירה">Esc</button>
+      </div>
+      <div class="search-status" id="searchStatus">הקלידי לפחות שני תווים</div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/highlight.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
