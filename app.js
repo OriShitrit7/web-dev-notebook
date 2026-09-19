@@ -1,21 +1,20 @@
-
 const topics = [
   { section: 'HTML', num: '01', slug: 'overview', title: 'Overview', subtitle: 'מה זה HTML ומה התפקיד שלו באתר', file: 'content/html/overview.md', ready: true },
   { section: 'HTML', num: '02', slug: 'elements-tags-nesting', title: 'Elements, Tags & Nesting', subtitle: 'הבסיס התחבירי והמבנה ההיררכי של HTML', file: 'content/html/elements-tags-nesting.md', ready: true },
-  { section: 'HTML', num: '03', slug: 'document-structure', title: 'Document Structure', subtitle: 'מבנה בסיסי של מסמך HTML', ready: false },
-  { section: 'HTML', num: '04', slug: 'metadata', title: 'Metadata', subtitle: 'מידע על המסמך בתוך head', ready: false },
-  { section: 'HTML', num: '05', slug: 'headings-sections', title: 'Headings & Sections', subtitle: 'כותרות וחלוקה נכונה של תוכן', ready: false },
-  { section: 'HTML', num: '06', slug: 'attributes', title: 'Attributes', subtitle: 'מידע נוסף שמצורף ל־Elements', ready: false },
-  { section: 'HTML', num: '07', slug: 'text-editing', title: 'Text Editing', subtitle: 'אלמנטים לעיצוב ומשמעות של טקסט', ready: false },
-  { section: 'HTML', num: '08', slug: 'lists', title: 'Lists', subtitle: 'רשימות מסודרות ולא מסודרות', ready: false },
-  { section: 'HTML', num: '09', slug: 'links', title: 'Links', subtitle: 'קישורים וניווט בין משאבים', ready: false },
-  { section: 'HTML', num: '10', slug: 'media', title: 'Images, Audio & Video', subtitle: 'שילוב מדיה בדף', ready: false },
-  { section: 'HTML', num: '11', slug: 'div-span', title: 'div & span', subtitle: 'Containers כלליים לקיבוץ תוכן', ready: false },
-  { section: 'HTML', num: '12', slug: 'semantic-navigation', title: 'Semantic HTML & Navigation', subtitle: 'מבנה סמנטי וניווט באתר', ready: false },
-  { section: 'HTML', num: '13', slug: 'tables', title: 'Tables', subtitle: 'הצגת מידע טבלאי', ready: false },
-  { section: 'HTML', num: '14', slug: 'forms', title: 'Forms', subtitle: 'קלט משתמש וטפסים', ready: false },
-  { section: 'HTML', num: '15', slug: 'file-paths', title: 'File Paths', subtitle: 'נתיבים יחסיים ומוחלטים', ready: false },
-  { section: 'HTML', num: '16', slug: 'connecting-css-js', title: 'Connecting CSS & JavaScript', subtitle: 'חיבור HTML לשכבות העיצוב והלוגיקה', ready: false },
+  { section: 'HTML', num: '03', slug: 'document-structure', title: 'Document Structure', subtitle: 'מבנה בסיסי של מסמך HTML', file: 'content/html/document-structure.md', ready: true },
+  { section: 'HTML', num: '04', slug: 'metadata', title: 'Metadata', subtitle: 'מידע על המסמך בתוך head', file: 'content/html/metadata.md', ready: true },
+  { section: 'HTML', num: '05', slug: 'headings-sections', title: 'Headings & Sections', subtitle: 'כותרות וחלוקה נכונה של תוכן', file: 'content/html/headings-sections.md', ready: true },
+  { section: 'HTML', num: '06', slug: 'attributes', title: 'Attributes', subtitle: 'מידע נוסף שמצורף ל־Elements', file: 'content/html/attributes.md', ready: true },
+  { section: 'HTML', num: '07', slug: 'text-editing', title: 'Text Editing', subtitle: 'אלמנטים לעיצוב ומשמעות של טקסט', file: 'content/html/text-editing.md', ready: true },
+  { section: 'HTML', num: '08', slug: 'lists', title: 'Lists', subtitle: 'רשימות מסודרות ולא מסודרות', file: 'content/html/lists.md', ready: true },
+  { section: 'HTML', num: '09', slug: 'links', title: 'Links', subtitle: 'קישורים וניווט בין משאבים', file: 'content/html/links.md', ready: true },
+  { section: 'HTML', num: '10', slug: 'media', title: 'Images, Audio & Video', subtitle: 'שילוב מדיה בדף', file: 'content/html/media.md', ready: true },
+  { section: 'HTML', num: '11', slug: 'div-span', title: 'div & span', subtitle: 'Containers כלליים לקיבוץ תוכן', file: 'content/html/div-span.md', ready: true },
+  { section: 'HTML', num: '12', slug: 'semantic-navigation', title: 'Semantic HTML & Navigation', subtitle: 'מבנה סמנטי וניווט באתר', file: 'content/html/semantic-navigation.md', ready: true },
+  { section: 'HTML', num: '13', slug: 'tables', title: 'Tables', subtitle: 'הצגת מידע טבלאי', file: 'content/html/tables.md', ready: true },
+  { section: 'HTML', num: '14', slug: 'forms', title: 'Forms', subtitle: 'קלט משתמש וטפסים', file: 'content/html/forms.md', ready: true },
+  { section: 'HTML', num: '15', slug: 'file-paths', title: 'File Paths', subtitle: 'נתיבים יחסיים ומוחלטים', file: 'content/html/file-paths.md', ready: true },
+  { section: 'HTML', num: '16', slug: 'connecting-css-js', title: 'Connecting CSS & JavaScript', subtitle: 'חיבור HTML לשכבות העיצוב והלוגיקה', file: 'content/html/connecting-css-js.md', ready: true },
   { section: 'CSS', num: '—', slug: 'css-home', title: 'CSS', subtitle: 'נוסיף לאחר סיום HTML', ready: false },
   { section: 'JavaScript', num: '—', slug: 'js-home', title: 'JavaScript', subtitle: 'נוסיף לאחר סיום HTML ו־CSS', ready: false }
 ];
@@ -23,18 +22,14 @@ const topics = [
 const state = {
   currentSlug: null,
   searchIndex: [],
-  loadedMarkdown: new Map()
+  loadedMarkdown: new Map(),
+  cleanup: []
 };
 
 const viewHost = document.getElementById('viewHost');
 const sidebarNav = document.getElementById('sidebarNav');
 
-marked.setOptions({
-  gfm: true,
-  breaks: false,
-  headerIds: false,
-  mangle: false
-});
+marked.setOptions({ gfm: true, breaks: false });
 
 function esc(s = '') {
   return String(s)
@@ -51,6 +46,14 @@ function slugifyHeading(text) {
     .replace(/[^\p{L}\p{N}\s-]/gu, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-');
+}
+
+/* Tear down listeners registered by the previous view. */
+function runCleanup() {
+  state.cleanup.forEach(fn => {
+    try { fn(); } catch {}
+  });
+  state.cleanup = [];
 }
 
 function buildSidebar() {
@@ -85,6 +88,8 @@ function topicBySlug(slug) {
 }
 
 function route() {
+  runCleanup();
+
   const hash = location.hash || '#/home';
   if (hash === '#/home' || hash === '#/' || hash === '') {
     state.currentSlug = null;
@@ -125,6 +130,10 @@ async function fetchMarkdown(topic) {
   return md;
 }
 
+/* ==========================================================================
+   Home
+   ========================================================================== */
+
 function renderHome() {
   const htmlTopics = topics.filter(t => t.section === 'HTML');
   viewHost.innerHTML = `
@@ -132,10 +141,10 @@ function renderHome() {
       <div class="wrap">
         <div class="hero">
           <span class="eyebrow">WEB DEVELOPMENT NOTEBOOK</span>
-          <h1>HTML, CSS<br>ו־JavaScript</h1>
+          <h1>HTML <span class="sep">·</span> CSS <span class="sep">·</span> JavaScript</h1>
           <p class="subtitle">
             מחברת לימוד אינטראקטיבית שמרכזת את חומר ה־Web Development בצורה מסודרת,
-            עם הסברים, קוד, ניווט וחיפוש.
+            עם הסברים, דוגמאות קוד חיות, ניווט וחיפוש.
           </p>
           <div class="meta-bar">
             <span><strong>${htmlTopics.length} נושאי HTML</strong></span>
@@ -147,20 +156,20 @@ function renderHome() {
         <div class="info-box">
           <h4>איך המחברת בנויה?</h4>
           <p>
-            כרגע מתחילים מ־HTML לפי הסילבוס שנבחר. כל נושא הופך לעמוד נפרד,
-            וה־Markdown נשאר קובץ עצמאי שאפשר לערוך גם מחוץ לאתר.
+            כל נושא בסילבוס הופך לעמוד נפרד, וה־Markdown נשאר קובץ עצמאי שאפשר לערוך גם מחוץ לאתר.
+          </p>
+          <p>
+            בתוך פרק, בלוקים ירוקים מסומנים ב־<strong>״נסי בעצמך״</strong> מציגים את הקוד ומתחתיו
+            את מה שהדפדפן באמת מרנדר ממנו — אותו קוד בדיוק, רץ חי בתוך העמוד.
           </p>
         </div>
 
         <div class="group-label">HTML · סילבוס</div>
         <div class="grid">
           ${htmlTopics.map(t => `
-            ${t.ready
-              ? `<a class="card" href="#/chapter/${t.slug}">`
-              : `<div class="card disabled">`
-            }
+            ${t.ready ? `<a class="card" href="#/chapter/${t.slug}">` : `<div class="card disabled">`}
                 <div class="card-num">
-                  <span>${t.num}</span>
+                  <span>${esc(t.num)}</span>
                   <span class="pill ${t.ready ? 'ready' : 'todo'}">${t.ready ? 'זמין' : 'בקרוב'}</span>
                 </div>
                 <h3>${esc(t.title)}</h3>
@@ -174,48 +183,63 @@ function renderHome() {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
+/* ==========================================================================
+   Chapter
+   ========================================================================== */
+
 async function renderChapter(topic) {
   viewHost.innerHTML = `
-    <main>
-      <span class="page-eyebrow">HTML · פרק ${topic.num}</span>
-      <h1 class="page-title">${esc(topic.title)}</h1>
-      <p class="page-subtitle">${esc(topic.subtitle)}</p>
-      <div class="chapter-actions">
-        <button class="small-btn" id="copyPageLink">העתקת קישור לעמוד</button>
-        <button class="small-btn" id="scrollTopBtn">חזרה לראש העמוד</button>
+    <main class="chapter">
+      <div class="chapter-main">
+        <span class="page-eyebrow">${esc(topic.section)} · פרק ${esc(topic.num)}</span>
+        <h1 class="page-title">${esc(topic.title)}</h1>
+        <p class="page-subtitle">${esc(topic.subtitle)}</p>
+        <div class="chapter-actions">
+          <button class="small-btn" id="copyPageLink" type="button">העתקת קישור לעמוד</button>
+          <button class="small-btn" id="scrollTopBtn" type="button">חזרה לראש העמוד</button>
+        </div>
+        <details class="toc-inline" id="tocInline"></details>
+        <article class="markdown-body" id="markdownBody">
+          <p>טוען תוכן…</p>
+        </article>
+        <div class="lesson-end" id="lessonEnd"></div>
       </div>
-      <article class="markdown-body" id="markdownBody">
-        <p>טוען תוכן…</p>
-      </article>
-      <div class="lesson-end" id="lessonEnd"></div>
+      <aside class="chapter-toc" id="chapterToc" aria-label="תוכן העניינים של הפרק"></aside>
     </main>
   `;
 
+  document.getElementById('copyPageLink').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    try {
+      await navigator.clipboard.writeText(location.href);
+      const old = btn.textContent;
+      btn.textContent = 'הקישור הועתק';
+      setTimeout(() => { btn.textContent = old; }, 1200);
+    } catch {}
+  });
+
+  document.getElementById('scrollTopBtn').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
   try {
     const md = await fetchMarkdown(topic);
+    if (state.currentSlug !== topic.slug) return;
+
     const body = document.getElementById('markdownBody');
     body.innerHTML = marked.parse(md);
 
-    // Remove duplicated H1 because the page shell already shows the title.
-    const firstH1 = body.querySelector('h1');
-    if (firstH1) firstH1.remove();
+    // The page shell already shows the title, so drop the H1 from the file.
+    body.querySelector('h1')?.remove();
 
-    enhanceHeadings(body);
+    enhanceDemos(body);
     enhanceCode(body);
+    enhanceTables(body);
+    const headings = enhanceHeadings(body);
+    buildToc(headings);
     renderPrevNext(topic);
 
-    document.getElementById('copyPageLink')?.addEventListener('click', async (e) => {
-      await navigator.clipboard.writeText(location.href);
-      const old = e.currentTarget.textContent;
-      e.currentTarget.textContent = 'הקישור הועתק';
-      setTimeout(() => e.currentTarget.textContent = old, 1200);
-    });
-
-    document.getElementById('scrollTopBtn')?.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   } catch (err) {
     document.getElementById('markdownBody').innerHTML = `
       <blockquote>
@@ -227,9 +251,14 @@ async function renderChapter(topic) {
 }
 
 function enhanceHeadings(root) {
-  root.querySelectorAll('h2, h3').forEach((h, idx) => {
-    const base = slugifyHeading(h.textContent) || `section-${idx + 1}`;
-    h.id = base;
+  const used = new Set();
+  return [...root.querySelectorAll('h2, h3')].map((h, idx) => {
+    let id = slugifyHeading(h.textContent) || `section-${idx + 1}`;
+    let n = 2;
+    while (used.has(id)) id = `${id}-${n++}`;
+    used.add(id);
+    h.id = id;
+    return h;
   });
 }
 
@@ -263,25 +292,225 @@ function enhanceCode(root) {
     shell.appendChild(pre);
 
     label.querySelector('.copy-code').addEventListener('click', async (e) => {
-      await navigator.clipboard.writeText(code.innerText);
-      e.currentTarget.textContent = 'Copied';
-      setTimeout(() => e.currentTarget.textContent = 'Copy', 1100);
+      try {
+        await navigator.clipboard.writeText(code.innerText);
+        e.currentTarget.textContent = 'Copied';
+        setTimeout(() => { e.currentTarget.textContent = 'Copy'; }, 1100);
+      } catch {}
     });
   });
 }
 
+/* Wrap wide tables so they scroll on their own instead of stretching the page. */
+function enhanceTables(root) {
+  root.querySelectorAll('table').forEach(table => {
+    if (table.parentElement?.classList.contains('table-scroll')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'table-scroll';
+    table.parentNode.insertBefore(wrap, table);
+    wrap.appendChild(table);
+  });
+}
+
+/* ==========================================================================
+   Live demos
+   A ```demo fenced block becomes: the HTML source + an iframe rendering it.
+   ========================================================================== */
+
+const DEMO_FRAME_CSS = `
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    padding: 18px 22px;
+    font-family: system-ui, 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1c1917;
+    background: #fff;
+  }
+  body > *:first-child { margin-top: 0; }
+  body > *:last-child { margin-bottom: 0; }
+  img { max-width: 100%; height: auto; }
+`;
+
+function buildDemoDocument(source) {
+  const trimmed = source.trim();
+  if (/^<!DOCTYPE|^<html/i.test(trimmed)) return trimmed;
+
+  const rtl = /[֐-׿]/.test(source);
+  return `<!DOCTYPE html>
+<html lang="${rtl ? 'he' : 'en'}" dir="${rtl ? 'rtl' : 'ltr'}">
+<head><meta charset="utf-8"><style>${DEMO_FRAME_CSS}</style></head>
+<body>
+${source}
+</body>
+</html>`;
+}
+
+/* An iframe's documentElement stretches to fill the frame, so measuring it at
+   the current height can only ever grow. Collapse the frame first, then read
+   the natural content height. */
+function sizeDemoFrame(frame) {
+  let doc;
+  try { doc = frame.contentDocument; } catch { return; }
+  if (!doc || !doc.documentElement) return;
+
+  frame.style.height = '0px';
+  const height = doc.documentElement.scrollHeight;
+  frame.style.height = `${Math.max(height, 40) + 1}px`;
+}
+
+function enhanceDemos(root) {
+  root.querySelectorAll('pre > code.language-demo').forEach(code => {
+    const pre = code.parentElement;
+    const source = code.textContent;
+
+    // The source is HTML, so label and highlight it as HTML.
+    code.classList.remove('language-demo');
+    code.classList.add('language-html');
+    try { hljs.highlightElement(code); } catch {}
+
+    const demo = document.createElement('div');
+    demo.className = 'demo';
+    // Preview first in the DOM so RTL puts it on the right and the code on the left.
+    demo.innerHTML = `
+      <div class="demo-pane demo-preview">
+        <div class="demo-label"><span>מה שהדפדפן מציג</span></div>
+        <iframe class="demo-frame" title="תצוגה חיה של הקוד שלצד זה"></iframe>
+      </div>
+      <div class="demo-pane demo-code">
+        <div class="demo-label">
+          <span>HTML</span>
+          <button class="copy-code" type="button">Copy</button>
+        </div>
+        <div class="code-shell"></div>
+      </div>
+    `;
+
+    pre.parentNode.insertBefore(demo, pre);
+    demo.querySelector('.code-shell').appendChild(pre);
+
+    demo.querySelector('.copy-code').addEventListener('click', async (e) => {
+      try {
+        await navigator.clipboard.writeText(source);
+        e.currentTarget.textContent = 'Copied';
+        setTimeout(() => { e.currentTarget.textContent = 'Copy'; }, 1100);
+      } catch {}
+    });
+
+    const frame = demo.querySelector('.demo-frame');
+    frame.addEventListener('load', () => {
+      sizeDemoFrame(frame);
+      // Re-measure once fonts and images have settled.
+      setTimeout(() => sizeDemoFrame(frame), 120);
+      setTimeout(() => sizeDemoFrame(frame), 600);
+    });
+    frame.srcdoc = buildDemoDocument(source);
+
+    const onResize = () => sizeDemoFrame(frame);
+    window.addEventListener('resize', onResize);
+    state.cleanup.push(() => window.removeEventListener('resize', onResize));
+  });
+}
+
+/* ==========================================================================
+   Table of contents + scroll spy
+   ========================================================================== */
+
+function buildToc(headings) {
+  const aside = document.getElementById('chapterToc');
+  const inline = document.getElementById('tocInline');
+  if (!aside || !inline) return;
+
+  if (headings.length < 3) {
+    aside.remove();
+    inline.remove();
+    document.querySelector('main.chapter')?.classList.add('no-toc');
+    return;
+  }
+
+  const items = headings.map(h => `
+    <li class="toc-${h.tagName.toLowerCase()}">
+      <button type="button" class="toc-link" data-target="${esc(h.id)}">${esc(h.textContent)}</button>
+    </li>
+  `).join('');
+
+  aside.innerHTML = `
+    <div class="toc-title">בפרק הזה</div>
+    <ul class="toc-list">${items}</ul>
+  `;
+
+  inline.innerHTML = `
+    <summary>תוכן העניינים של הפרק</summary>
+    <ul class="toc-list">${items}</ul>
+  `;
+
+  const links = [...document.querySelectorAll('.toc-link')];
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      const target = document.getElementById(link.dataset.target);
+      if (!target) return;
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      inline.open = false;
+    });
+  });
+
+  // The heading that owns the reading position: the last one at or above an
+  // imaginary line near the top of the viewport. Measured against the viewport
+  // rather than offsetTop, so it stays correct regardless of offsetParent.
+  const activeHeadingId = () => {
+    const atBottom = window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 4;
+    if (atBottom) return headings[headings.length - 1].id;
+
+    let activeId = headings[0].id;
+    for (const h of headings) {
+      if (h.getBoundingClientRect().top <= 120) activeId = h.id;
+      else break;
+    }
+    return activeId;
+  };
+
+  const paint = () => {
+    const activeId = activeHeadingId();
+    links.forEach(l => l.classList.toggle('active', l.dataset.target === activeId));
+  };
+
+  let ticking = false;
+  const spy = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      paint();
+    });
+  };
+
+  window.addEventListener('scroll', spy, { passive: true });
+  state.cleanup.push(() => window.removeEventListener('scroll', spy));
+  paint();
+
+  // Exposed so the scroll-spy selection can be exercised directly in tests.
+  state.repaintToc = paint;
+}
+
 function renderPrevNext(topic) {
-  const htmlTopics = topics.filter(t => t.section === 'HTML');
-  const index = htmlTopics.findIndex(t => t.slug === topic.slug);
-  const prev = [...htmlTopics.slice(0, index)].reverse().find(t => t.ready);
-  const next = htmlTopics.slice(index + 1).find(t => t.ready);
+  const sameSection = topics.filter(t => t.section === topic.section);
+  const index = sameSection.findIndex(t => t.slug === topic.slug);
+  const prev = [...sameSection.slice(0, index)].reverse().find(t => t.ready);
+  const next = sameSection.slice(index + 1).find(t => t.ready);
 
   document.getElementById('lessonEnd').innerHTML = `
     <div>
-      ${prev ? `<a class="lesson-link" href="#/chapter/${prev.slug}">→ ${esc(prev.title)}</a>` : `<a class="lesson-link" href="#/home">→ עמוד הבית</a>`}
+      ${prev
+        ? `<a class="lesson-link" href="#/chapter/${prev.slug}">→ ${esc(prev.title)}</a>`
+        : `<a class="lesson-link" href="#/home">→ עמוד הבית</a>`}
     </div>
     <div>
-      ${next ? `<a class="lesson-link" href="#/chapter/${next.slug}">${esc(next.title)} ←</a>` : `<a class="lesson-link" href="#/home">עמוד הבית ←</a>`}
+      ${next
+        ? `<a class="lesson-link" href="#/chapter/${next.slug}">${esc(next.title)} ←</a>`
+        : `<a class="lesson-link" href="#/home">עמוד הבית ←</a>`}
     </div>
   `;
 }
@@ -300,6 +529,10 @@ function renderPlaceholder(topic) {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
+/* ==========================================================================
+   Search
+   ========================================================================== */
+
 async function buildSearchIndex() {
   const items = topics.map(t => ({
     slug: t.slug,
@@ -314,6 +547,7 @@ async function buildSearchIndex() {
       const md = await fetchMarkdown(t);
       const plain = md
         .replace(/```[\s\S]*?```/g, ' ')
+        .replace(/<[^>]+>/g, ' ')
         .replace(/[#>*_`\-\[\]()]/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
@@ -365,14 +599,21 @@ function runSearch(query) {
   `).join('');
 }
 
+/* ==========================================================================
+   Boot
+   ========================================================================== */
+
+const NARROW = 900;
+
 function initUi() {
   buildSidebar();
 
-  const collapse = () => document.body.classList.add('nav-collapsed');
-  const expand = () => document.body.classList.remove('nav-collapsed');
-
-  document.getElementById('navCollapse').addEventListener('click', collapse);
-  document.getElementById('navOpen').addEventListener('click', expand);
+  document.getElementById('navCollapse').addEventListener('click', () => {
+    document.body.classList.add('nav-collapsed');
+  });
+  document.getElementById('navOpen').addEventListener('click', () => {
+    document.body.classList.remove('nav-collapsed');
+  });
 
   document.getElementById('searchOpen').addEventListener('click', openSearch);
   document.getElementById('searchClose').addEventListener('click', closeSearch);
@@ -390,9 +631,20 @@ function initUi() {
     if (e.key === 'Escape') closeSearch();
   });
 
-  if (window.innerWidth <= 900) document.body.classList.add('nav-collapsed');
+  // Auto-collapse on narrow screens, and restore the sidebar when the window
+  // grows again — otherwise it stays hidden until a reload.
+  let wasNarrow = window.innerWidth <= NARROW;
+  document.body.classList.toggle('nav-collapsed', wasNarrow);
+
+  window.addEventListener('resize', () => {
+    const narrow = window.innerWidth <= NARROW;
+    if (narrow === wasNarrow) return;
+    wasNarrow = narrow;
+    document.body.classList.toggle('nav-collapsed', narrow);
+  });
+
   window.addEventListener('hashchange', () => {
-    if (window.innerWidth <= 900) document.body.classList.add('nav-collapsed');
+    if (window.innerWidth <= NARROW) document.body.classList.add('nav-collapsed');
     route();
   });
 

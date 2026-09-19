@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Claude Code local dev config (the documented way to run locally is start.command)
+.claude/
