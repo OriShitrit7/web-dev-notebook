@@ -96,6 +96,46 @@
   </div>
 </div>
 
+<div class="box example">
+  <div class="box-head"><span class="icon">🔍</span>לראות מה באמת נשלח</div>
+  <div class="box-body">
+    <p>
+      שני השדות למטה נראים זהים לחלוטין, ושניהם מלאים. ההבדל היחיד ביניהם:
+      לראשון יש <code>name</code> ולשני אין. לחצי <strong>Submit</strong>
+      ותראי מה הדפדפן באמת שולח.
+    </p>
+    <p class="note-line">
+      ה־<code>script</code> שבדוגמה קיים רק כדי להדפיס את התוצאה על המסך.
+      ההשמטה עצמה היא של הדפדפן ומתרחשת גם בלעדיו.
+    </p>
+  </div>
+</div>
+
+```demo
+<form id="signup">
+  <p><label>City <input name="city" value="Ashdod"></label></p>
+  <p><label>Nickname <input value="Ori"></label></p>
+  <button>Submit</button>
+</form>
+
+<p>What the browser sends:</p>
+<pre id="sent">— nothing yet —</pre>
+
+<script>
+  document.getElementById('signup').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var pairs = new URLSearchParams(new FormData(this));
+    document.getElementById('sent').textContent = pairs.toString() || '(empty)';
+  });
+</script>
+```
+
+<div class="keypoint">
+התוצאה היא <code>city=Ashdod</code> בלבד. השדה השני מולא, נראה תקין,
+ופשוט <strong>לא קיים</strong> במה שנשלח — אין לו <code>name</code>, ולכן אין לו מפתח.
+זה בדיוק המצב שבו מחפשים באג בשרת שלמה שעה, כשהתיקון הוא מילה אחת ב־HTML.
+</div>
+
 ## label — התווית של השדה
 
 <div class="box theory">
