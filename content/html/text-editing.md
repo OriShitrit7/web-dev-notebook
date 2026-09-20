@@ -113,6 +113,7 @@ the source</p>
 | `<del>` | טקסט שנמחק | קו חוצה |
 | `<ins>` | טקסט שנוסף | קו תחתון |
 | `<s>` | כבר לא נכון או לא רלוונטי | קו חוצה |
+| `<u>` | הערה לא־מילולית, למשל שגיאת כתיב | קו תחתון |
 | `<sub>` | כתב תחתי | קטן ומונמך |
 | `<sup>` | כתב עילי | קטן ומוגבה |
 
@@ -121,16 +122,45 @@ the source</p>
 <p><small>Terms and conditions</small></p>
 <p><del>$50</del> <ins>$35</ins></p>
 <p>H<sub>2</sub>O and x<sup>2</sup></p>
+<p><u>recieve</u> is misspelled</p>
 ```
 
 <div class="box example">
-  <div class="box-head"><span class="icon">💡</span>del מול s</div>
+  <div class="box-head"><span class="icon">💡</span>שני זוגות שנראים זהים</div>
   <div class="box-body">
-    <p>שניהם מציגים קו חוצה, אבל הם אומרים דברים שונים:</p>
+    <p>ארבעה מהאלמנטים בטבלה מתחלקים לשני זוגות שאי אפשר להבדיל ביניהם בעין:</p>
+    <h4>קו חוצה: del מול s</h4>
     <ul>
       <li><code>&lt;del&gt;</code> — הטקסט <strong>הוסר מהמסמך</strong>. שימושי בתיעוד שינויים.</li>
       <li><code>&lt;s&gt;</code> — הטקסט <strong>כבר לא מדויק</strong>, אבל לא נמחק. למשל מחיר ישן לצד מחיר מבצע.</li>
     </ul>
+    <h4>קו תחתון: ins מול u</h4>
+    <ul>
+      <li><code>&lt;ins&gt;</code> — הטקסט <strong>נוסף למסמך</strong>. התאום של <code>&lt;del&gt;</code>.</li>
+      <li><code>&lt;u&gt;</code> — <strong>הערה לא־מילולית</strong> על הטקסט: הוא מסומן למשהו, אבל הסימון עצמו לא נאמר במילים.</li>
+    </ul>
+    <p class="note-line">
+      בכל אחד מהזוגות, הבחירה נקבעת לפי <strong>מה קרה לטקסט</strong> ולא לפי איך שהוא נראה.
+    </p>
+  </div>
+</div>
+
+<div class="box warn">
+  <div class="box-head"><span class="icon">⚠️</span>u — קיים, אבל עדיף להימנע</div>
+  <div class="box-body">
+    <p>
+      <code>&lt;u&gt;</code> אינו מיושן. ב־HTML 4 הוא היה תגית עיצוב בלבד,
+      וב־HTML5 הוגדר מחדש עם משמעות — סימון שגיאת כתיב, או שם פרטי בטקסט סיני.
+    </p>
+    <p>
+      הבעיה שלו מעשית: <strong>קו תחתון מזוהה בעיני משתמשים עם קישור.</strong>
+      טקסט עם קו תחתון שאי אפשר ללחוץ עליו מבלבל, ולכן ברוב המקרים עדיף
+      <code>&lt;em&gt;</code>, <code>&lt;mark&gt;</code> או <code>&lt;strong&gt;</code>.
+    </p>
+    <p class="note-line">
+      וחשוב במיוחד: <code>&lt;u&gt;</code> הוא <strong>לא</strong> הדרך להוסיף קו תחתון לעיצוב.
+      לזה יש CSS, בדיוק כמו שלהדגשה לא משתמשים ב־<code>&lt;b&gt;</code>.
+    </p>
   </div>
 </div>
 
@@ -315,7 +345,9 @@ Second idea.&lt;/p&gt;</code></pre>
       <li>הדפדפן <strong>מכווץ רצפי רווחים וירידות שורה</strong> לרווח אחד.</li>
       <li><strong><code>&lt;strong&gt;</code></strong> — חשיבות. <strong><code>&lt;em&gt;</code></strong> — הטעמה. שתיהן נשמעות אחרת בקורא מסך.</li>
       <li><strong><code>&lt;b&gt;</code></strong> ו־<strong><code>&lt;i&gt;</code></strong> — מראה בלבד, בלי משמעות. עדיף להימנע.</li>
-      <li><code>&lt;mark&gt;</code>, <code>&lt;small&gt;</code>, <code>&lt;del&gt;</code>, <code>&lt;ins&gt;</code>, <code>&lt;sub&gt;</code>, <code>&lt;sup&gt;</code> — לסימון טקסט לפי משמעות.</li>
+      <li><code>&lt;mark&gt;</code>, <code>&lt;small&gt;</code>, <code>&lt;del&gt;</code>, <code>&lt;ins&gt;</code>, <code>&lt;s&gt;</code>, <code>&lt;u&gt;</code>, <code>&lt;sub&gt;</code>, <code>&lt;sup&gt;</code> — לסימון טקסט לפי משמעות.</li>
+      <li>שני זוגות נראים זהים: <strong>del / s</strong> (קו חוצה) ו־<strong>ins / u</strong> (קו תחתון).</li>
+      <li><strong><code>&lt;u&gt;</code></strong> תקין אך מבלבל — קו תחתון נראה כמו קישור. לקו תחתון עיצובי יש CSS.</li>
       <li><strong><code>&lt;br&gt;</code></strong> לירידת שורה שהיא חלק מהתוכן, <strong>לא</strong> לריווח.</li>
       <li><strong><code>&lt;hr&gt;</code></strong> — מעבר נושאי, לא סתם קו.</li>
       <li><code>&lt;blockquote&gt;</code> לציטוט בלוק, <code>&lt;q&gt;</code> לציטוט בשורה (מוסיף מרכאות לבד), <code>&lt;cite&gt;</code> לשם היצירה.</li>
