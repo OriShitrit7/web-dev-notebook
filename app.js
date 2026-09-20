@@ -233,6 +233,7 @@ async function renderChapter(topic) {
     body.querySelector('h1')?.remove();
 
     enhanceDemos(body);
+    enhanceQuizzes(body);
     enhanceCode(body);
     enhanceTables(body);
     const headings = enhanceHeadings(body);
@@ -410,6 +411,165 @@ function enhanceDemos(root) {
     const onResize = () => sizeDemoFrame(frame);
     window.addEventListener('resize', onResize);
     state.cleanup.push(() => window.removeEventListener('resize', onResize));
+  });
+}
+
+/* ==========================================================================
+   Self-check quiz
+   A ```quiz fenced block becomes an interactive multiple-choice set.
+
+   Authoring format — one question per `?` line:
+     ? The question text, `code` allowed
+     - a wrong option
+     + the correct option
+     - another wrong option
+     = the explanation shown after answering
+   ========================================================================== */
+
+function inlineMarkup(text) {
+  return esc(text).replace(/`([^`]+)`/g, '<code>$1</code>');
+}
+
+function parseQuiz(source) {
+  const questions = [];
+  let current = null;
+
+  source.split('\n').forEach(raw => {
+    const line = raw.trim();
+    if (!line) return;
+    const body = line.slice(1).trim();
+
+    if (line.startsWith('?')) {
+      current = { prompt: body, options: [], answer: -1, why: '' };
+      questions.push(current);
+      return;
+    }
+    if (!current) return;
+
+    if (line.startsWith('+')) {
+      current.answer = current.options.length;
+      current.options.push(body);
+    } else if (line.startsWith('-')) {
+      current.options.push(body);
+    } else if (line.startsWith('=')) {
+      current.why = body;
+    }
+  });
+
+  // Drop anything malformed rather than rendering a broken question.
+  return questions.filter(q => q.options.length >= 2 && q.answer >= 0);
+}
+
+function enhanceQuizzes(root) {
+  root.querySelectorAll('pre > code.language-quiz').forEach(code => {
+    const questions = parseQuiz(code.textContent);
+    const pre = code.parentElement;
+
+    if (!questions.length) {
+      pre.remove();
+      return;
+    }
+
+    const quiz = document.createElement('section');
+    quiz.className = 'quiz';
+    quiz.innerHTML = `
+      <div class="quiz-head">
+        <span class="icon">✓</span>
+        <span>${questions.length} שאלות</span>
+        <span class="quiz-score"></span>
+      </div>
+      <ol class="quiz-list">
+        ${questions.map((q, qi) => `
+          <li class="quiz-q" data-answer="${q.answer}">
+            <div class="quiz-prompt">
+              <span class="quiz-num">${qi + 1}</span>
+              <span>${inlineMarkup(q.prompt)}</span>
+            </div>
+            <ul class="quiz-options">
+              ${q.options.map((opt, oi) => `
+                <li>
+                  <button type="button" class="quiz-opt" data-index="${oi}">
+                    <span class="quiz-marker"></span>
+                    <span>${inlineMarkup(opt)}</span>
+                  </button>
+                </li>
+              `).join('')}
+            </ul>
+            ${q.why ? `<div class="quiz-why" hidden>${inlineMarkup(q.why)}</div>` : ''}
+          </li>
+        `).join('')}
+      </ol>
+      <div class="quiz-foot">
+        <span class="quiz-result" hidden></span>
+        <button type="button" class="quiz-reset">התחלה מחדש</button>
+      </div>
+    `;
+
+    pre.parentNode.insertBefore(quiz, pre);
+    pre.remove();
+
+    const scoreEl = quiz.querySelector('.quiz-score');
+    const resultEl = quiz.querySelector('.quiz-result');
+    let answered = 0;
+    let correct = 0;
+
+    const paintScore = () => {
+      scoreEl.textContent = answered ? `${correct}/${questions.length}` : '';
+      const done = answered === questions.length;
+      resultEl.hidden = !done;
+      if (done) {
+        resultEl.textContent = correct === questions.length
+          ? `כל הכבוד — ${correct} מתוך ${questions.length}`
+          : `ענית נכון על ${correct} מתוך ${questions.length}`;
+      }
+    };
+
+    quiz.querySelectorAll('.quiz-q').forEach(question => {
+      const answer = Number(question.dataset.answer);
+      const options = [...question.querySelectorAll('.quiz-opt')];
+      const why = question.querySelector('.quiz-why');
+
+      options.forEach(option => {
+        option.addEventListener('click', () => {
+          if (question.dataset.done) return;
+          question.dataset.done = '1';
+
+          const picked = Number(option.dataset.index);
+          const gotIt = picked === answer;
+
+          options.forEach(o => {
+            o.disabled = true;
+            const i = Number(o.dataset.index);
+            if (i === answer) o.classList.add('correct');
+            else if (i === picked) o.classList.add('wrong');
+            else o.classList.add('dimmed');
+          });
+
+          if (why) why.hidden = false;
+          answered += 1;
+          if (gotIt) correct += 1;
+          paintScore();
+        });
+      });
+    });
+
+    quiz.querySelector('.quiz-reset').addEventListener('click', () => {
+      answered = 0;
+      correct = 0;
+      quiz.querySelectorAll('.quiz-q').forEach(question => {
+        delete question.dataset.done;
+        question.querySelectorAll('.quiz-opt').forEach(o => {
+          o.disabled = false;
+          o.classList.remove('correct', 'wrong', 'dimmed');
+        });
+        const why = question.querySelector('.quiz-why');
+        if (why) why.hidden = true;
+      });
+      paintScore();
+      quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    paintScore();
   });
 }
 
