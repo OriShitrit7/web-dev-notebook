@@ -13,7 +13,7 @@ assets/
 └── images/
     └── sample.svg          ← תמונת הדגמה לפרקי המדיה והנתיבים
 content/
-├── css/                    ← 16 פרקי CSS (בכתיבה)
+├── css/                    ← 17 פרקי CSS (בכתיבה)
 └── html/                   ← 16 פרקי HTML, קובץ לכל פרק
     ├── overview.md
     ├── elements-tags-nesting.md
