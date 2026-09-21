@@ -15,8 +15,23 @@ const topics = [
   { section: 'HTML', num: '14', slug: 'forms', title: 'Forms', subtitle: 'קלט משתמש וטפסים', file: 'content/html/forms.md', ready: true },
   { section: 'HTML', num: '15', slug: 'file-paths', title: 'File Paths', subtitle: 'נתיבים יחסיים ומוחלטים', file: 'content/html/file-paths.md', ready: true },
   { section: 'HTML', num: '16', slug: 'connecting-css-js', title: 'Connecting CSS & JavaScript', subtitle: 'חיבור HTML לשכבות העיצוב והלוגיקה', file: 'content/html/connecting-css-js.md', ready: true },
-  { section: 'CSS', num: '—', slug: 'css-home', title: 'CSS', subtitle: 'נוסיף לאחר סיום HTML', ready: false },
-  { section: 'JavaScript', num: '—', slug: 'js-home', title: 'JavaScript', subtitle: 'נוסיף לאחר סיום HTML ו־CSS', ready: false }
+  { section: 'CSS', num: '01', slug: 'css-overview', title: 'CSS Overview', subtitle: 'מה זה CSS ואיך מחברים אותו לדף', ready: false },
+  { section: 'CSS', num: '02', slug: 'css-syntax-selectors', title: 'Syntax & Selectors', subtitle: 'מבנה של כלל, ובוררי אלמנט, class ו־id', ready: false },
+  { section: 'CSS', num: '03', slug: 'css-advanced-selectors', title: 'Advanced Selectors', subtitle: 'קומבינטורים, פסאודו־מחלקות ופסאודו־אלמנטים', ready: false },
+  { section: 'CSS', num: '04', slug: 'css-cascade', title: 'Cascade & Specificity', subtitle: 'איך הדפדפן מכריע בין כללים סותרים', ready: false },
+  { section: 'CSS', num: '05', slug: 'css-colors-units', title: 'Colors & Units', subtitle: 'צבעים ויחידות מידה', ready: false },
+  { section: 'CSS', num: '06', slug: 'css-typography', title: 'Typography', subtitle: 'גופנים ועיצוב טקסט', ready: false },
+  { section: 'CSS', num: '07', slug: 'css-box-model', title: 'Box Model', subtitle: 'padding, border ו־margin סביב כל אלמנט', ready: false },
+  { section: 'CSS', num: '08', slug: 'css-display-flow', title: 'Display & Flow', subtitle: 'block, inline וזרימת המסמך', ready: false },
+  { section: 'CSS', num: '09', slug: 'css-positioning', title: 'Positioning', subtitle: 'מיקום אלמנטים ו־z-index', ready: false },
+  { section: 'CSS', num: '10', slug: 'css-flexbox', title: 'Flexbox', subtitle: 'פריסה חד־ממדית', ready: false },
+  { section: 'CSS', num: '11', slug: 'css-grid', title: 'Grid', subtitle: 'פריסה דו־ממדית', ready: false },
+  { section: 'CSS', num: '12', slug: 'css-backgrounds-borders', title: 'Backgrounds & Borders', subtitle: 'רקעים, גרדיאנטים, פינות וצללים', ready: false },
+  { section: 'CSS', num: '13', slug: 'css-transitions-transforms', title: 'Transitions & Transforms', subtitle: 'מעברים חלקים ושינוי צורה', ready: false },
+  { section: 'CSS', num: '14', slug: 'css-animations', title: 'Animations', subtitle: 'אנימציות עם keyframes', ready: false },
+  { section: 'CSS', num: '15', slug: 'css-responsive', title: 'Responsive Design', subtitle: 'התאמה לכל גודל מסך', ready: false },
+  { section: 'CSS', num: '16', slug: 'css-variables-architecture', title: 'Variables & Architecture', subtitle: 'משתני CSS וארגון קובץ העיצוב', ready: false },
+  { section: 'JavaScript', num: '—', slug: 'js-home', title: 'JavaScript', subtitle: 'נוסיף לאחר סיום CSS', ready: false }
 ];
 
 const state = {
@@ -135,7 +150,35 @@ async function fetchMarkdown(topic) {
    ========================================================================== */
 
 function renderHome() {
-  const htmlTopics = topics.filter(t => t.section === 'HTML');
+  const sections = [...new Set(topics.map(t => t.section))];
+  const readyTotal = topics.filter(t => t.ready).length;
+
+  const card = t => `
+    ${t.ready ? `<a class="card" href="#/chapter/${t.slug}">` : `<div class="card disabled">`}
+      <div class="card-num">
+        <span>${esc(t.num)}</span>
+        <span class="pill ${t.ready ? 'ready' : 'todo'}">${t.ready ? 'זמין' : 'בקרוב'}</span>
+      </div>
+      <h3>${esc(t.title)}</h3>
+      <p>${esc(t.subtitle)}</p>
+    ${t.ready ? `</a>` : `</div>`}
+  `;
+
+  const groups = sections.map(section => {
+    const list = topics.filter(t => t.section === section);
+    const ready = list.filter(t => t.ready).length;
+    const status = ready === list.length ? 'הושלם'
+      : ready ? `${ready} מתוך ${list.length} זמינים`
+      : 'בקרוב';
+    return `
+      <div class="group-label">
+        <span>${esc(section)} · סילבוס</span>
+        <span class="group-meta">${status}</span>
+      </div>
+      <div class="grid">${list.map(card).join('')}</div>
+    `;
+  }).join('');
+
   viewHost.innerHTML = `
     <div class="home-view">
       <div class="wrap">
@@ -144,11 +187,11 @@ function renderHome() {
           <h1>HTML <span class="sep">·</span> CSS <span class="sep">·</span> JavaScript</h1>
           <p class="subtitle">
             מחברת לימוד אינטראקטיבית שמרכזת את חומר ה־Web Development בצורה מסודרת,
-            עם הסברים, דוגמאות קוד חיות, ניווט וחיפוש.
+            עם הסברים, דוגמאות קוד חיות, שאלוני בדיקה עצמית, ניווט וחיפוש.
           </p>
           <div class="meta-bar">
-            <span><strong>${htmlTopics.length} נושאי HTML</strong></span>
-            <span><strong>${htmlTopics.filter(t => t.ready).length} פרקים זמינים</strong></span>
+            <span><strong>${topics.length} נושאים</strong></span>
+            <span><strong>${readyTotal} פרקים זמינים</strong></span>
             <span>התוכן נשמר כקבצי Markdown נפרדים</span>
           </div>
         </div>
@@ -159,24 +202,12 @@ function renderHome() {
             כל נושא בסילבוס הופך לעמוד נפרד, וה־Markdown נשאר קובץ עצמאי שאפשר לערוך גם מחוץ לאתר.
           </p>
           <p>
-            בתוך פרק, בלוקים ירוקים מסומנים ב־<strong>״נסי בעצמך״</strong> מציגים את הקוד ומתחתיו
-            את מה שהדפדפן באמת מרנדר ממנו — אותו קוד בדיוק, רץ חי בתוך העמוד.
+            בתוך פרק, בלוקים מסומנים ב־<strong>״מה שהדפדפן מציג״</strong> מציגים את הקוד ולצידו
+            את מה שהדפדפן באמת מרנדר ממנו. בסוף כל פרק יש <strong>שאלון קצר</strong> לבדיקה עצמית.
           </p>
         </div>
 
-        <div class="group-label">HTML · סילבוס</div>
-        <div class="grid">
-          ${htmlTopics.map(t => `
-            ${t.ready ? `<a class="card" href="#/chapter/${t.slug}">` : `<div class="card disabled">`}
-                <div class="card-num">
-                  <span>${esc(t.num)}</span>
-                  <span class="pill ${t.ready ? 'ready' : 'todo'}">${t.ready ? 'זמין' : 'בקרוב'}</span>
-                </div>
-                <h3>${esc(t.title)}</h3>
-                <p>${esc(t.subtitle)}</p>
-            ${t.ready ? `</a>` : `</div>`}
-          `).join('')}
-        </div>
+        ${groups}
       </div>
     </div>
   `;

@@ -13,6 +13,7 @@ assets/
 └── images/
     └── sample.svg          ← תמונת הדגמה לפרקי המדיה והנתיבים
 content/
+├── css/                    ← 16 פרקי CSS (בכתיבה)
 └── html/                   ← 16 פרקי HTML, קובץ לכל פרק
     ├── overview.md
     ├── elements-tags-nesting.md
@@ -77,9 +78,14 @@ python3 -m http.server 8000
 
 ## הוספת פרק חדש
 
-1. ליצור קובץ Markdown חדש תחת `content/html/`.
-2. לעדכן את רשימת `topics` בראש `app.js`.
-3. להגדיר `ready: true` ולהוסיף את הנתיב ב־`file`.
+1. ליצור קובץ Markdown חדש תחת `content/<section>/` (למשל `content/css/`).
+2. למצוא את הנושא ברשימת `topics` בראש `app.js`.
+3. להוסיף לו `file: 'content/css/...'` ולשנות ל־`ready: true`.
+
+הנושא כבר מופיע בתפריט ובעמוד הבית כ״בקרוב״ — השלבים האלה רק הופכים אותו לזמין.
+
+> **שים לב ל־`slug`:** הניתוב באתר לפי slug, והוא חייב להיות **ייחודי בכל הסילבוסים**.
+> לכן פרקי CSS מתחילים ב־`css-` — אחרת `css-overview` היה מתנגש עם `overview` של HTML.
 
 ---
 
