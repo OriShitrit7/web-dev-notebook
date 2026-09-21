@@ -29,9 +29,9 @@ const topics = [
   { section: 'CSS', num: '12', slug: 'css-grid', title: 'Grid', subtitle: 'פריסה דו־ממדית', file: 'content/css/grid.md', ready: true },
   { section: 'CSS', num: '13', slug: 'css-variables', title: 'CSS Variables', subtitle: 'משתנים מותאמים אישית', file: 'content/css/variables.md', ready: true },
   { section: 'CSS', num: '14', slug: 'css-responsive', title: 'Responsive Design', subtitle: 'התאמה לכל גודל מסך', file: 'content/css/responsive.md', ready: true },
-  { section: 'CSS', num: '15', slug: 'css-transitions-animations', title: 'Transitions, Transforms & Animations', subtitle: 'מעברים, שינוי צורה ותנועה', ready: false },
-  { section: 'CSS', num: '16', slug: 'css-modern-utilities', title: 'Modern CSS & Utilities', subtitle: 'יכולות CSS מודרניות וכלי עזר', ready: false },
-  { section: 'CSS', num: '17', slug: 'css-best-practices', title: 'CSS Best Practices & Debugging', subtitle: 'ארגון קוד ואיתור תקלות', ready: false },
+  { section: 'CSS', num: '15', slug: 'css-transitions-animations', title: 'Transitions, Transforms & Animations', subtitle: 'מעברים, שינוי צורה ותנועה', file: 'content/css/transitions-animations.md', ready: true },
+  { section: 'CSS', num: '16', slug: 'css-modern-utilities', title: 'Modern CSS & Utilities', subtitle: 'יכולות CSS מודרניות וכלי עזר', file: 'content/css/modern-utilities.md', ready: true },
+  { section: 'CSS', num: '17', slug: 'css-best-practices', title: 'CSS Best Practices & Debugging', subtitle: 'ארגון קוד ואיתור תקלות', file: 'content/css/best-practices.md', ready: true },
   { section: 'JavaScript', num: '—', slug: 'js-home', title: 'JavaScript', subtitle: 'נוסיף לאחר סיום CSS', ready: false }
 ];
 

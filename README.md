@@ -13,7 +13,24 @@ assets/
 └── images/
     └── sample.svg          ← תמונת הדגמה לפרקי המדיה והנתיבים
 content/
-├── css/                    ← 17 פרקי CSS (בכתיבה)
+├── css/                    ← 17 פרקי CSS, קובץ לכל פרק
+│   ├── overview.md
+│   ├── syntax-selectors.md
+│   ├── advanced-selectors.md
+│   ├── cascade.md
+│   ├── colors-backgrounds.md
+│   ├── units-sizing.md
+│   ├── typography.md
+│   ├── box-model.md
+│   ├── borders-shadows.md
+│   ├── display-positioning.md
+│   ├── flexbox.md
+│   ├── grid.md
+│   ├── variables.md
+│   ├── responsive.md
+│   ├── transitions-animations.md
+│   ├── modern-utilities.md
+│   └── best-practices.md
 └── html/                   ← 16 פרקי HTML, קובץ לכל פרק
     ├── overview.md
     ├── elements-tags-nesting.md
