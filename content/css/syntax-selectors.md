@@ -213,6 +213,104 @@ h1 {
 <p class="box warning">box וגם warning</p>
 ```
 
+## בורר משולב
+
+<div class="box theory">
+  <div class="box-head"><span class="icon">🔗</span>כמה תנאים על אותו אלמנט</div>
+  <div class="box-body">
+    <p>
+      בדמו האחרון היו <strong>שני כללים נפרדים</strong> — <code>.box</code> ו־<code>.warning</code> —
+      וכל אחד מהם חל על הפסקה בזכות עצמו. אבל אפשר גם לדרוש את שניהם <strong>יחד</strong>.
+    </p>
+    <p>
+      כשמצמידים שני בוררים <strong>בלי רווח ביניהם</strong>, הם מתארים
+      <strong>אלמנט אחד</strong> שחייב לעמוד בכל התנאים:
+    </p>
+    <p>
+      <code>.box.warning</code> — כל אלמנט שנושא גם את <code>box</code>
+      <strong>וגם</strong> את <code>warning</code>.
+    </p>
+    <p class="note-line">
+      הצורה הזו נקראת <strong>compound selector</strong>, בורר משולב.
+      יש קורסים שקוראים לה <em>Inclusion</em>.
+    </p>
+  </div>
+</div>
+
+```demo
+<style>
+  p { font-family: system-ui; margin: 0 0 6px; }
+  .box { border: 2px solid #cbd5e1; padding: 8px; }
+  .warning { color: #be123c; }
+  .box.warning { background: #fff1f2; font-weight: bold; }
+</style>
+<p class="box">box only</p>
+<p class="warning">warning only</p>
+<p class="box warning">box and warning together</p>
+```
+
+<div class="keypoint">
+רק לפסקה השלישית יש רקע ורוד וטקסט מודגש, כי <strong>רק היא</strong>
+נושאת את שני ה־classes. שתי הראשונות מקבלות את הכללים הבודדים בלבד.
+</div>
+
+<div class="box warn">
+  <div class="box-head"><span class="icon">⚠️</span>רווח אחד, משמעות אחרת</div>
+  <div class="box-body">
+    <p>זו טעות שקשה מאוד לראות בעין, כי ההבדל הוא תו אחד:</p>
+    <ul>
+      <li><code>.card.active</code> — <strong>אלמנט אחד</strong> שיש לו את שני ה־classes.</li>
+      <li><code>.card .active</code> — אלמנט עם <code>active</code> <strong>שנמצא בתוך</strong> אלמנט עם <code>card</code>. <strong>שני אלמנטים שונים.</strong></li>
+    </ul>
+    <p class="note-line">
+      כבר ראינו שרווח <strong>במקום פסיק</strong> משנה את המשמעות. עכשיו מתברר
+      שגם רווח <strong>מיותר</strong> עושה את זה. את היחס שהרווח מתאר נלמד בפרק הבא.
+    </p>
+  </div>
+</div>
+
+```demo
+<style>
+  div { font-family: system-ui; }
+  .card { border: 2px solid #cbd5e1; padding: 8px; margin-bottom: 8px; }
+  .card.active { background: #eef2ff; }
+  .card .active { color: #be123c; font-weight: bold; }
+</style>
+<div class="card active">card AND active — blue background</div>
+<div class="card"><span class="active">active inside card — red text</span></div>
+```
+
+<div class="box">
+  <div class="box-body">
+    <p>אפשר לשלב גם סוגים שונים של בוררים, לא רק שני classes:</p>
+    <ul>
+      <li><code>p.note</code> — רק <code>&lt;p&gt;</code> שיש לו <code>class="note"</code>. <code>&lt;div class="note"&gt;</code> לא ייתפס.</li>
+      <li><code>a.btn.primary</code> — קישור שנושא את שני ה־classes.</li>
+      <li><code>#main.active</code> — האלמנט שה־id שלו <code>main</code>, וגם יש לו class בשם <code>active</code>.</li>
+    </ul>
+    <p class="note-line">
+      אם יש שם תגית בבורר המשולב, הוא תמיד <strong>מתחיל</strong> בה:
+      <code>p.note</code> תקין, ואילו <code>.notep</code> הוא פשוט שם class אחר לגמרי.
+    </p>
+  </div>
+</div>
+
+<div class="box example">
+  <div class="box-head"><span class="icon">💡</span>הדפוס שבשבילו זה נועד</div>
+  <div class="box-body">
+    <p>
+      כך בונים <strong>וריאציה</strong> של רכיב: <code>.btn</code> מגדיר את הבסיס
+      המשותף, ו־<code>.btn.danger</code> משנה רק את מה שבאמת שונה בגרסה האדומה.
+      ב־HTML כותבים <code>class="btn danger"</code>, והאלמנט מקבל את שניהם.
+    </p>
+    <p class="note-line">
+      בורר משולב הוא גם <strong>ספציפי יותר</strong> מכל אחד מחלקיו בנפרד,
+      ולכן הוא דורס אותם בלי מאמץ. את המנגנון המדויק נראה בפרק
+      <strong>Cascade, Specificity &amp; Inheritance</strong>.
+    </p>
+  </div>
+</div>
+
 ## הבורר האוניברסלי
 
 <div class="box">
@@ -312,6 +410,7 @@ h1 {
       <li><strong>נקודה או סולמית ב־HTML</strong> — כותבים <code>class="note"</code>, לא <code>class=".note"</code>.</li>
       <li><strong><code>//</code> להערה</strong> — לא קיים ב־CSS. רק <code>/* */</code>.</li>
       <li><strong>רווח במקום פסיק</strong> — <code>h2 p</code> אינו <code>h2, p</code>.</li>
+      <li><strong>רווח מיותר בבורר משולב</strong> — <code>.box .warning</code> אינו <code>.box.warning</code>.</li>
       <li><strong>אותיות גדולות בשם</strong> — <code>.myBox</code> ו־<code>.mybox</code> הם שני דברים שונים.</li>
       <li><strong>סוגר מסולסל חסר</strong> — כל הכללים שאחריו עלולים להתבטל.</li>
     </ul>
@@ -331,6 +430,7 @@ h1 {
       <li><strong>בורר אלמנט</strong> — <code>p</code>. <strong>class</strong> — <code>.note</code>. <strong>id</strong> — <code>#header</code>.</li>
       <li>לעיצוב משתמשים כמעט תמיד ב־<strong>class</strong>; id חזק מדי וקשה לדרוס.</li>
       <li>אלמנט יכול לשאת <strong>כמה classes</strong>, מופרדים ברווח.</li>
+      <li><strong>בורר משולב</strong> — <code>.box.warning</code>, בלי רווח — דורש שאלמנט <strong>אחד</strong> יעמוד בכל התנאים.</li>
       <li><code>*</code> בוחר הכול, ומשמש בעיקר ל־reset.</li>
       <li><strong>פסיק</strong> מקבץ בוררים; רווח פירושו משהו אחר לגמרי.</li>
       <li>שמות: אותיות קטנות עם מקפים, ולפי <strong>המשמעות</strong> ולא לפי המראה.</li>
