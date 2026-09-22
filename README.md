@@ -13,11 +13,16 @@ assets/
 └── images/
     └── sample.svg          ← תמונת הדגמה לפרקי המדיה והנתיבים
 content/
-├── js/                     ← 14 פרקי JavaScript (בכתיבה)
+├── js/                     ← 14 פרקי JavaScript, קובץ לכל פרק
 │   ├── overview.md
 │   ├── variables.md
 │   ├── operators.md
 │   ├── strings.md
+│   ├── conditionals.md
+│   ├── loops.md
+│   ├── functions.md
+│   ├── arrays.md
+│   ├── objects.md
 │   ├── dom.md
 │   ├── dom-manipulation.md
 │   ├── events.md
