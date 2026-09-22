@@ -17,7 +17,12 @@ content/
 │   ├── overview.md
 │   ├── variables.md
 │   ├── operators.md
-│   └── strings.md
+│   ├── strings.md
+│   ├── dom.md
+│   ├── dom-manipulation.md
+│   ├── events.md
+│   ├── forms.md
+│   └── projects.md
 ├── css/                    ← 17 פרקי CSS, קובץ לכל פרק
 │   ├── overview.md
 │   ├── syntax-selectors.md

@@ -41,11 +41,11 @@ const topics = [
   { section: 'JavaScript', num: '07', slug: 'js-functions', title: 'Functions', subtitle: 'פונקציות ו־arrow functions', ready: false },
   { section: 'JavaScript', num: '08', slug: 'js-arrays', title: 'Arrays', subtitle: 'מערכים ומתודות מרכזיות', ready: false },
   { section: 'JavaScript', num: '09', slug: 'js-objects', title: 'Objects', subtitle: 'אובייקטים ו־JSON', ready: false },
-  { section: 'JavaScript', num: '10', slug: 'js-dom', title: 'The DOM', subtitle: 'עץ המסמך וגישה אליו', ready: false },
-  { section: 'JavaScript', num: '11', slug: 'js-dom-manipulation', title: 'DOM Manipulation', subtitle: 'שינוי הדף בזמן ריצה', ready: false },
-  { section: 'JavaScript', num: '12', slug: 'js-events', title: 'Events', subtitle: 'אירועים ותגובה למשתמש', ready: false },
-  { section: 'JavaScript', num: '13', slug: 'js-forms', title: 'User Input & Forms', subtitle: 'קלט משתמש וטפסים', ready: false },
-  { section: 'JavaScript', num: '14', slug: 'js-projects', title: 'Mini Web Projects', subtitle: 'פרויקטים קטנים משולבים', ready: false }
+  { section: 'JavaScript', num: '10', slug: 'js-dom', title: 'The DOM', subtitle: 'עץ המסמך וגישה אליו', file: 'content/js/dom.md', ready: true },
+  { section: 'JavaScript', num: '11', slug: 'js-dom-manipulation', title: 'DOM Manipulation', subtitle: 'שינוי הדף בזמן ריצה', file: 'content/js/dom-manipulation.md', ready: true },
+  { section: 'JavaScript', num: '12', slug: 'js-events', title: 'Events', subtitle: 'אירועים ותגובה למשתמש', file: 'content/js/events.md', ready: true },
+  { section: 'JavaScript', num: '13', slug: 'js-forms', title: 'User Input & Forms', subtitle: 'קלט משתמש וטפסים', file: 'content/js/forms.md', ready: true },
+  { section: 'JavaScript', num: '14', slug: 'js-projects', title: 'Mini Web Projects', subtitle: 'פרויקטים קטנים משולבים', file: 'content/js/projects.md', ready: true }
 ];
 
 const state = {
