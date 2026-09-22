@@ -64,17 +64,17 @@
     minus.disabled = count === 0;
   }
 
-  document.getElementById("plus").addEventListener("click", function () {
+  document.getElementById("plus").addEventListener("click", () => {
     count = count + 1;
     render();
   });
 
-  minus.addEventListener("click", function () {
+  minus.addEventListener("click", () => {
     count = count - 1;
     render();
   });
 
-  document.getElementById("reset").addEventListener("click", function () {
+  document.getElementById("reset").addEventListener("click", () => {
     count = 0;
     render();
   });
@@ -123,7 +123,7 @@
   .todo li span { flex: 1; min-width: 0; }
   .todo li.done span { text-decoration: line-through; color: #94a3b8; }
   .remove { background: transparent; color: #be123c; padding: 2px 6px; }
-  .empty { color: #94a3b8; font-size: 13px; }
+  .status { color: #94a3b8; font-size: 13px; margin: 10px 0 0; }
 </style>
 <div class="todo">
   <form id="form">
@@ -131,19 +131,23 @@
     <button type="submit">Add</button>
   </form>
   <ul id="list"></ul>
-  <p class="empty" id="empty">No tasks yet</p>
+  <p class="status" id="status">No tasks yet</p>
 </div>
 <script>
   const form = document.getElementById("form");
   const text = document.getElementById("text");
   const list = document.getElementById("list");
-  const empty = document.getElementById("empty");
+  const status = document.getElementById("status");
 
-  function refreshEmpty() {
-    empty.hidden = list.children.length > 0;
+  function refreshStatus() {
+    const items = [...list.children];
+    const done = items.filter(li => li.classList.contains("done")).length;
+    status.textContent = items.length === 0
+      ? "No tasks yet"
+      : done + " of " + items.length + " done";
   }
 
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
     const title = text.value.trim();
     if (title === "") return;
@@ -162,27 +166,47 @@
 
     text.value = "";
     text.focus();
-    refreshEmpty();
+    refreshStatus();
     console.log("added:", title);
   });
 
-  list.addEventListener("click", function (e) {
+  list.addEventListener("click", (e) => {
     const li = e.target.closest("li");
     if (!li) return;
 
     if (e.target.classList.contains("remove")) {
       li.remove();
-      refreshEmpty();
+      refreshStatus();
       console.log("removed");
       return;
     }
     li.classList.toggle("done");
+    refreshStatus();
     console.log("toggled:", li.classList.contains("done"));
   });
 
-  refreshEmpty();
+  refreshStatus();
 </script>
 ```
+
+<div class="box example">
+  <div class="box-head"><span class="icon">🔢</span>איפה המערכים נכנסים</div>
+  <div class="box-body">
+    <p>
+      שורת הסטטוס סופרת כמה משימות הושלמו, וזה המקום שבו פרק
+      <strong>Arrays</strong> נפגש עם פרק <strong>The DOM</strong>:
+    </p>
+    <p><code>const items = [...list.children];</code></p>
+    <p>
+      <code>list.children</code> אינו מערך אלא אוסף, בדיוק כמו ה־NodeList
+      שראינו בפרק The DOM — ולכן אין לו <code>filter</code>.
+      ה־spread הופך אותו למערך אמיתי, ומשם כל המתודות זמינות.
+    </p>
+    <p class="note-line">
+      אפשר היה גם <code>Array.from(list.children)</code>. שתי הצורות שקולות.
+    </p>
+  </div>
+</div>
 
 <div class="box example">
   <div class="box-head"><span class="icon">🧩</span>מה קורה כאן</div>
@@ -194,6 +218,7 @@
       <li><strong>מאזין אחד על <code>ul</code></strong> — עובד גם על פריטים שנוצרו עכשיו.</li>
       <li><strong><code>closest("li")</code></strong> — כי הלחיצה עלולה ליפול על ה־<code>span</code> שבפנים.</li>
       <li><strong><code>classList.toggle("done")</code></strong> — הקו החוצה מוגדר כולו ב־CSS.</li>
+      <li><strong><code>[...list.children]</code> ואז <code>filter</code></strong> — ספירת המשימות שהושלמו.</li>
     </ul>
   </div>
 </div>
@@ -231,7 +256,7 @@
 <script>
   const theme = document.getElementById("theme");
 
-  document.getElementById("toggle").addEventListener("click", function () {
+  document.getElementById("toggle").addEventListener("click", () => {
     const isDark = theme.dataset.theme === "dark";
     theme.dataset.theme = isDark ? "light" : "dark";
     console.log("theme is now:", theme.dataset.theme);

@@ -141,7 +141,7 @@
   console.log(Array.isArray(items));
   console.log(items.length, items[0].textContent);
 
-  items.forEach(function (el) { console.log("forEach:", el.textContent); });
+  items.forEach(el => console.log("forEach:", el.textContent));
 
   const real = Array.from(items);
   console.log(Array.isArray(real));
@@ -151,8 +151,8 @@
 <div class="box">
   <div class="box-body">
     <p class="note-line">
-      <code>forEach</code>, <code>map</code> ומערכים בכלל הם הנושא של פרק
-      <strong>Arrays</strong>. כאן מספיק לדעת שההמרה קיימת ולמה היא נחוצה.
+      <code>forEach</code>, <code>map</code> ומערכים בכלל נלמדו בפרק
+      <strong>Arrays</strong>, ולכן ההמרה הזו פותחת עליהם את כל הכלים משם.
     </p>
   </div>
 </div>

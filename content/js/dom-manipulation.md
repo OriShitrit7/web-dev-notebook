@@ -207,7 +207,9 @@ box.style.borderRadius = "8px";</code></pre>
   list.append(item);
   console.log("after append:", document.querySelectorAll("#list li").length);
 
-  list.prepend(Object.assign(document.createElement("li"), { textContent: "first" }));
+  const first = document.createElement("li");
+  first.textContent = "first";
+  list.prepend(first);
   console.log("after prepend:", document.querySelectorAll("#list li").length);
 </script>
 ```
@@ -231,7 +233,7 @@ box.style.borderRadius = "8px";</code></pre>
       זה בדיוק מה שעושה כל רשימת מוצרים, כל טבלה וכל פיד.
     </p>
     <p class="note-line">
-      את <code>forEach</code> ואת המערכים עצמם נפרק לעומק בפרק
+      <code>forEach</code>, <code>map</code> והמערכים עצמם נלמדו בפרק
       <strong>Arrays</strong>. כאן מעניין אותנו רק הצד של ה־DOM.
     </p>
   </div>
@@ -243,7 +245,7 @@ box.style.borderRadius = "8px";</code></pre>
   const fruits = ["Apple", "Banana", "Cherry"];
   const list = document.getElementById("fruits");
 
-  fruits.forEach(function (name) {
+  fruits.forEach(name => {
     const li = document.createElement("li");
     li.textContent = name;
     list.append(li);

@@ -83,7 +83,7 @@
   <button type="submit">Send</button>
 </form>
 <script>
-  document.getElementById("signup").addEventListener("submit", function (e) {
+  document.getElementById("signup").addEventListener("submit", (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
     console.log("name:", data.get("name"));
@@ -167,7 +167,7 @@
   const email = document.getElementById("email");
   const msg = document.getElementById("msg");
 
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
     if (!email.checkValidity()) {
       msg.textContent = "Please enter a valid email address";
@@ -230,7 +230,7 @@
   const counter = document.getElementById("counter");
   const send = document.getElementById("send");
 
-  bio.addEventListener("input", function () {
+  bio.addEventListener("input", () => {
     const used = bio.value.length;
     counter.textContent = used + " / 40";
     send.disabled = used === 0;

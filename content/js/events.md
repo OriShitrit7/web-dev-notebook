@@ -24,7 +24,7 @@
     <p class="note-line">
       הפונקציה <strong>לא נקראת</strong> כאן — רק <strong>נמסרת</strong>.
       הדפדפן הוא שיקרא לה מאוחר יותר. פונקציה שנמסרת כארגומנט
-      נקראת <strong>callback</strong>, ונפגוש אותה שוב בפרק Functions.
+      נקראת <strong>callback</strong> — בדיוק מה שראינו בפרק Functions.
     </p>
   </div>
 </div>
@@ -52,7 +52,7 @@
   const btn = document.getElementById("btn");
   let count = 0;
 
-  btn.addEventListener("click", function () {
+  btn.addEventListener("click", () => {
     count = count + 1;
     console.log("clicked", count, "times");
   });
@@ -97,7 +97,7 @@
   <button>B</button>
 </div>
 <script>
-  document.getElementById("panel").addEventListener("click", function (e) {
+  document.getElementById("panel").addEventListener("click", (e) => {
     console.log("type:", e.type);
     console.log("target:", e.target.tagName, e.target.textContent);
     console.log("currentTarget:", e.currentTarget.id);
@@ -160,13 +160,13 @@
   const list = document.getElementById("list");
   let next = 3;
 
-  list.addEventListener("click", function (e) {
+  list.addEventListener("click", (e) => {
     const btn = e.target.closest("button");
     if (!btn) return;
     console.log("clicked item", btn.dataset.id);
   });
 
-  document.getElementById("add").addEventListener("click", function () {
+  document.getElementById("add").addEventListener("click", () => {
     const li = document.createElement("li");
     const b = document.createElement("button");
     b.textContent = "Item " + next;
@@ -214,7 +214,7 @@
 ```demo
 <a href="https://example.com" id="link" style="font-family:system-ui">A link that will not navigate</a>
 <script>
-  document.getElementById("link").addEventListener("click", function (e) {
+  document.getElementById("link").addEventListener("click", (e) => {
     e.preventDefault();
     console.log("default prevented — the browser did not navigate");
   });
@@ -238,11 +238,11 @@
 <script>
   const field = document.getElementById("field");
 
-  field.addEventListener("input", function (e) {
+  field.addEventListener("input", (e) => {
     console.log("input:", e.target.value);
   });
 
-  field.addEventListener("keydown", function (e) {
+  field.addEventListener("keydown", (e) => {
     if (e.key === "Enter") console.log("Enter pressed");
   });
 </script>
