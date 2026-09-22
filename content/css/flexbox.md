@@ -122,17 +122,43 @@ Flexbox הוא המנוע שפותר את רוב בעיות הפריסה היו�
 
 ```demo
 <style>
+  .lbl { font: 12px monospace; color: #6b6b70; margin: 10px 0 3px; }
   .bar { display: flex; background: #eef2ff; padding: 6px;
-         margin-bottom: 6px; font-family: system-ui; font-size: 13px; }
-  .bar div { background: #4f46e5; color: white; padding: 6px; }
+         font-family: system-ui; font-size: 13px; }
+  .bar div { background: #4f46e5; color: white;
+             padding: 6px 12px; }
+  .s { justify-content: flex-start; }
+  .c { justify-content: center; }
+  .e { justify-content: flex-end; }
   .between { justify-content: space-between; }
-  .center { justify-content: center; }
-  .evenly { justify-content: space-evenly; }
+  .around  { justify-content: space-around; }
+  .evenly  { justify-content: space-evenly; }
 </style>
-<div class="bar between"><div>start</div><div>end</div></div>
-<div class="bar center"><div>a</div><div>b</div></div>
-<div class="bar evenly"><div>a</div><div>b</div></div>
+<p class="lbl">flex-start</p>
+<div class="bar s"><div>1</div><div>2</div><div>3</div></div>
+<p class="lbl">center</p>
+<div class="bar c"><div>1</div><div>2</div><div>3</div></div>
+<p class="lbl">flex-end</p>
+<div class="bar e"><div>1</div><div>2</div><div>3</div></div>
+<p class="lbl">space-between</p>
+<div class="bar between"><div>1</div><div>2</div><div>3</div></div>
+<p class="lbl">space-around</p>
+<div class="bar around"><div>1</div><div>2</div><div>3</div></div>
+<p class="lbl">space-evenly</p>
+<div class="bar evenly"><div>1</div><div>2</div><div>3</div></div>
 ```
+
+<div class="box">
+  <div class="box-body">
+    <p class="note-line">
+      שלושת הבלוקים זהים בכל השורות — רק <code>justify-content</code> משתנה.
+      שימי לב להבדל בין שלושת האחרונים: ב־<code>space-between</code>
+      אין מרווח בקצוות כלל, ב־<code>space-around</code> המרווח בקצה הוא
+      <strong>חצי</strong> מזה שבין הפריטים, וב־<code>space-evenly</code>
+      כל המרווחים זהים.
+    </p>
+  </div>
+</div>
 
 ## align-items
 
@@ -150,17 +176,67 @@ Flexbox הוא המנוע שפותר את רוב בעיות הפריסה היו�
   </div>
 </div>
 
+| ערך | התוצאה |
+| --- | --- |
+| `stretch` | נמתחים לגובה המיכל (ברירת מחדל) |
+| `flex-start` | נצמדים לתחילת הציר המשני |
+| `center` | ממורכזים בציר המשני |
+| `flex-end` | נצמדים לסוף הציר המשני |
+| `baseline` | **קו הבסיס של הטקסט** מיושר בין הפריטים |
+
 ```demo
 <style>
-  .bar { display: flex; background: #eef2ff; height: 80px;
-         padding: 6px; gap: 6px; margin-bottom: 8px;
-         font-family: system-ui; font-size: 13px; }
-  .bar div { background: #4f46e5; color: white; padding: 6px; }
-  .c { align-items: center; }
+  .lbl { font: 12px monospace; color: #6b6b70; margin: 10px 0 3px; }
+  .bar { display: flex; gap: 8px; height: 76px;
+         background: #eef2ff; padding: 6px; font-family: system-ui; }
+  .bar div { background: #4f46e5; color: white; padding: 4px 12px; }
+  .n1 { font-size: 12px; }
+  .n2 { font-size: 26px; }
+  .n3 { font-size: 17px; }
+  .stretch  { align-items: stretch; }
+  .s        { align-items: flex-start; }
+  .c        { align-items: center; }
+  .e        { align-items: flex-end; }
+  .baseline { align-items: baseline; }
 </style>
-<div class="bar"><div>stretch</div><div>is the default</div></div>
-<div class="bar c"><div>center</div><div>on the cross axis</div></div>
+<p class="lbl">stretch</p>
+<div class="bar stretch"><div class="n1">1</div><div class="n2">2</div><div class="n3">3</div></div>
+<p class="lbl">flex-start</p>
+<div class="bar s"><div class="n1">1</div><div class="n2">2</div><div class="n3">3</div></div>
+<p class="lbl">center</p>
+<div class="bar c"><div class="n1">1</div><div class="n2">2</div><div class="n3">3</div></div>
+<p class="lbl">flex-end</p>
+<div class="bar e"><div class="n1">1</div><div class="n2">2</div><div class="n3">3</div></div>
+<p class="lbl">baseline</p>
+<div class="bar baseline"><div class="n1">1</div><div class="n2">2</div><div class="n3">3</div></div>
 ```
+
+<div class="box">
+  <div class="box-body">
+    <p class="note-line">
+      לשלושת הבלוקים כאן יש <strong>גודל גופן שונה</strong>, ולכן הגובה
+      הטבעי שלהם שונה — אחרת לא היה אפשר לראות את ההבדל בין הערכים.
+      ב־<code>stretch</code> כולם נמתחים לגובה המיכל ומאבדים את ההבדל;
+      בשלושת הבאים הם שומרים על גובהם ורק משנים מיקום.
+    </p>
+  </div>
+</div>
+
+<div class="box example">
+  <div class="box-head"><span class="icon">📏</span>baseline הוא לא center</div>
+  <div class="box-body">
+    <p>
+      <code>baseline</code> לא מיישר את <strong>הקופסאות</strong> אלא את
+      <strong>קו הבסיס של הטקסט</strong> שבתוכן — הקו הדמיוני שהאותיות
+      ״יושבות״ עליו.
+    </p>
+    <p class="note-line">
+      בשורה האחרונה בדמו שלושת המספרים נמצאים על אותו קו, למרות
+      שהקופסאות בגדלים שונים. זה בדיוק מה שרוצים כשמציבים טקסט
+      בגדלים שונים זה לצד זה — למשל מחיר גדול עם ״₪״ קטן לידו.
+    </p>
+  </div>
+</div>
 
 <div class="box example">
   <div class="box-head"><span class="icon">🎯</span>מרכוז מושלם בשתי שורות</div>
@@ -231,6 +307,82 @@ Flexbox הוא המנוע שפותר את רוב בעיות הפריסה היו�
   <div>one</div><div>two</div><div>three</div><div>four</div>
 </div>
 ```
+
+### align-content
+
+<div class="box theory">
+  <div class="box-head"><span class="icon">📚</span>מיישר שורות, לא פריטים</div>
+  <div class="box-body">
+    <p>
+      ברגע שיש <strong>יותר משורה אחת</strong>, נכנס לתמונה מאפיין נוסף
+      שקל לבלבל בינו לבין <code>align-items</code>:
+    </p>
+    <ul>
+      <li><strong><code>align-items</code></strong> — מיישר כל פריט <strong>בתוך השורה שלו</strong>.</li>
+      <li><strong><code>align-content</code></strong> — מיישר את <strong>השורות עצמן</strong> בתוך המיכל.</li>
+    </ul>
+    <p class="note-line">
+      אפשר לחשוב על זה כך: <code>align-content</code> הוא מה ש־<code>justify-content</code>
+      עושה לציר הראשי — רק שהוא עושה אותו לשורות, בציר המשני.
+    </p>
+  </div>
+</div>
+
+<div class="box warn">
+  <div class="box-head"><span class="icon">⚠️</span>שני תנאים, אחרת הוא לא עושה כלום</div>
+  <div class="box-body">
+    <ul>
+      <li><strong>חייב להיות <code>flex-wrap: wrap</code></strong> — עם שורה אחת אין מה ליישר.</li>
+      <li><strong>חייב להיות מקום פנוי בציר המשני</strong> — כלומר מיכל שגובהו גדול מסך גובה השורות.</li>
+    </ul>
+    <p class="note-line">
+      זו הסיבה הנפוצה ביותר ש״<code>align-content</code> לא עובד״:
+      המיכל פשוט נצמד לגובה התוכן, ואין שום מקום לחלק.
+    </p>
+  </div>
+</div>
+
+<div class="box">
+  <div class="box-body">
+    <p>
+      הערכים זהים לאלה של <code>justify-content</code>:
+      <code>flex-start</code>, <code>center</code>, <code>flex-end</code>,
+      <code>space-between</code>, <code>space-around</code> ו־<code>space-evenly</code> —
+      ובנוסף <code>stretch</code>, שהוא <strong>ברירת המחדל</strong>
+      ומותח את השורות כך שימלאו את הגובה.
+    </p>
+  </div>
+</div>
+
+```demo
+<style>
+  .lbl { font: 12px monospace; color: #6b6b70; margin: 10px 0 3px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 6px; height: 130px;
+          background: #eef2ff; padding: 6px; font-family: system-ui;
+          font-size: 13px; }
+  .grid div { background: #4f46e5; color: white; padding: 6px;
+              width: 90px; height: 28px; }
+  .start   { align-content: flex-start; }
+  .center  { align-content: center; }
+  .between { align-content: space-between; }
+</style>
+<p class="lbl">align-content: flex-start</p>
+<div class="grid start"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+<p class="lbl">align-content: center</p>
+<div class="grid center"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+<p class="lbl">align-content: space-between</p>
+<div class="grid between"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+```
+
+<div class="box">
+  <div class="box-body">
+    <p class="note-line">
+      בשלושת המיכלים יש בדיוק אותם ארבעה פריטים, שנשברים לשתי שורות.
+      מה שמשתנה הוא <strong>איפה שתי השורות יושבות</strong> בתוך גובה
+      המיכל — למעלה, במרכז, או צמודות לשני הקצוות.
+    </p>
+  </div>
+</div>
 
 ## מאפיינים על הפריט
 
@@ -304,6 +456,41 @@ Flexbox הוא המנוע שפותר את רוב בעיות הפריסה היו�
   </div>
 </div>
 
+```demo
+<style>
+  .nav { display: flex; align-items: center; gap: 16px;
+         background: #eef2ff; padding: 10px 14px;
+         font-family: system-ui; font-size: 13px; }
+  .nav a { color: #312e81; text-decoration: none; }
+  .nav .brand { font-weight: 700; }
+  .nav .login { margin-inline-start: auto;
+                background: #4f46e5; color: white;
+                padding: 6px 14px; border-radius: 6px; }
+</style>
+<nav class="nav">
+  <a class="brand" href="#">Logo</a>
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a class="login" href="#">Log in</a>
+</nav>
+```
+
+<div class="box">
+  <div class="box-body">
+    <p class="note-line">
+      שלושת הקישורים הראשונים נשארו צמודים זה לזה בתחילת השורה,
+      ורק ״Log in״ נדחף לקצה — כי ה־<code>margin</code> שלו בלע את כל
+      המקום הפנוי שנשאר. לא היה צריך לעטוף את השלושה ב־<code>&lt;div&gt;</code>
+      נפרד, ולא היה צריך <code>position</code>.
+    </p>
+    <p class="note-line">
+      שימי לב שהכלל נכתב <code>.nav .login</code> ולא <code>.login</code>:
+      הוא צריך לגבור על <code>.nav a</code> שקבע את הצבע, ולכן הוא זקוק
+      לאותה ספציפיות ומעלה. בדיוק החשבון מפרק <strong>Cascade</strong>.
+    </p>
+  </div>
+</div>
+
 ### order
 
 <div class="box warn">
@@ -331,6 +518,8 @@ Flexbox הוא המנוע שפותר את רוב בעיות הפריסה היו�
       <li><strong>בלבול בין הצירים</strong> — ב־<code>column</code>, <code>justify-content</code> עובד <strong>אנכית</strong>.</li>
       <li><strong>שכחת <code>flex-wrap: wrap</code></strong> — הפריטים נדחסים במקום לרדת שורה.</li>
       <li><strong><code>margin</code> במקום <code>gap</code></strong> — מוסיף מרווח גם בקצוות.</li>
+      <li><strong>בלבול בין <code>align-items</code> ל־<code>align-content</code></strong> — הראשון מיישר פריט בתוך השורה, השני מיישר את השורות במיכל.</li>
+      <li><strong><code>align-content</code> שלא עושה כלום</strong> — כי אין <code>wrap</code>, או שגובה המיכל נצמד לתוכן ואין מקום פנוי לחלק.</li>
       <li><strong>שימוש ב־<code>order</code> לשינוי סדר משמעותי</strong> — שובר ניווט מקלדת.</li>
       <li><strong>ציפייה ש־<code>flex: 1</code> ייתן רוחב שווה</strong> — הוא מחלק את <strong>המקום הפנוי</strong>, לא את הרוחב הכולל. לרוחב זהה צריך גם <code>flex-basis: 0</code>, וזה בדיוק מה ש־<code>flex: 1</code> עושה בפועל.</li>
       <li><strong>פריט שמסרב להתכווץ</strong> — לפריטי flex יש <code>min-width: auto</code>, שמונע מהם לרדת מתחת לרוחב התוכן. טקסט ארוך או <code>&lt;pre&gt;</code> יגלשו מהמיכל, והיחסים שביקשת יתעוותו. הפתרון הוא <code>min-width: 0</code> על הפריט.</li>
@@ -351,6 +540,7 @@ Flexbox הוא המנוע שפותר את רוב בעיות הפריסה היו�
       <li>ברירת המחדל של <code>align-items</code> היא <code>stretch</code> — ומכאן הגבהים השווים.</li>
       <li><code>gap</code> נותן מרווח <strong>רק בין</strong> פריטים, בלי הקצוות.</li>
       <li><code>flex-wrap: wrap</code> מאפשר ירידת שורה. בלעדיו הפריטים נדחסים.</li>
+      <li><strong><code>align-content</code></strong> מיישר את <strong>השורות</strong>, ודורש <code>wrap</code> <strong>וגם</strong> מקום פנוי בגובה.</li>
       <li><code>flex: 1</code> מחלק את <strong>המקום הפנוי</strong> בין הפריטים.</li>
       <li><code>margin-inline-start: auto</code> דוחף פריט בודד לקצה.</li>
       <li>לפריט יש <code>min-width: auto</code> כברירת מחדל — לכן לפעמים צריך <code>min-width: 0</code>.</li>
