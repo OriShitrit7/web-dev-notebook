@@ -32,7 +32,20 @@ const topics = [
   { section: 'CSS', num: '15', slug: 'css-transitions-animations', title: 'Transitions, Transforms & Animations', subtitle: 'מעברים, שינוי צורה ותנועה', file: 'content/css/transitions-animations.md', ready: true },
   { section: 'CSS', num: '16', slug: 'css-modern-utilities', title: 'Modern CSS & Utilities', subtitle: 'יכולות CSS מודרניות וכלי עזר', file: 'content/css/modern-utilities.md', ready: true },
   { section: 'CSS', num: '17', slug: 'css-best-practices', title: 'CSS Best Practices & Debugging', subtitle: 'ארגון קוד ואיתור תקלות', file: 'content/css/best-practices.md', ready: true },
-  { section: 'JavaScript', num: '—', slug: 'js-home', title: 'JavaScript', subtitle: 'נוסיף לאחר סיום CSS', ready: false }
+  { section: 'JavaScript', num: '01', slug: 'js-overview', title: 'Overview', subtitle: 'מה זה JavaScript ואיפה הוא רץ', file: 'content/js/overview.md', ready: true },
+  { section: 'JavaScript', num: '02', slug: 'js-variables', title: 'Variables & Data Types', subtitle: 'const, let וטיפוסי הנתונים', file: 'content/js/variables.md', ready: true },
+  { section: 'JavaScript', num: '03', slug: 'js-operators', title: 'Operators', subtitle: 'אופרטורים, השוואות והמרות טיפוס', file: 'content/js/operators.md', ready: true },
+  { section: 'JavaScript', num: '04', slug: 'js-strings', title: 'Strings', subtitle: 'מחרוזות, template literals ומתודות', file: 'content/js/strings.md', ready: true },
+  { section: 'JavaScript', num: '05', slug: 'js-conditionals', title: 'Conditionals', subtitle: 'if, else ותנאים', ready: false },
+  { section: 'JavaScript', num: '06', slug: 'js-loops', title: 'Loops', subtitle: 'לולאות ומעבר על נתונים', ready: false },
+  { section: 'JavaScript', num: '07', slug: 'js-functions', title: 'Functions', subtitle: 'פונקציות ו־arrow functions', ready: false },
+  { section: 'JavaScript', num: '08', slug: 'js-arrays', title: 'Arrays', subtitle: 'מערכים ומתודות מרכזיות', ready: false },
+  { section: 'JavaScript', num: '09', slug: 'js-objects', title: 'Objects', subtitle: 'אובייקטים ו־JSON', ready: false },
+  { section: 'JavaScript', num: '10', slug: 'js-dom', title: 'The DOM', subtitle: 'עץ המסמך וגישה אליו', ready: false },
+  { section: 'JavaScript', num: '11', slug: 'js-dom-manipulation', title: 'DOM Manipulation', subtitle: 'שינוי הדף בזמן ריצה', ready: false },
+  { section: 'JavaScript', num: '12', slug: 'js-events', title: 'Events', subtitle: 'אירועים ותגובה למשתמש', ready: false },
+  { section: 'JavaScript', num: '13', slug: 'js-forms', title: 'User Input & Forms', subtitle: 'קלט משתמש וטפסים', ready: false },
+  { section: 'JavaScript', num: '14', slug: 'js-projects', title: 'Mini Web Projects', subtitle: 'פרויקטים קטנים משולבים', ready: false }
 ];
 
 const state = {
@@ -364,6 +377,86 @@ const DEMO_FRAME_CSS = `
   body > *:first-child { margin-top: 0; }
   body > *:last-child { margin-bottom: 0; }
   img { max-width: 100%; height: auto; }
+
+  /* Console panel. Only appears once the demo actually logs something. */
+  .demo-console {
+    margin: 14px 0 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', 'SF Mono', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    direction: ltr;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .demo-console-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #64748b;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .demo-console-line { display: block; }
+  .demo-console-line.is-warn { color: #fbbf24; }
+  .demo-console-line.is-error { color: #fca5a5; }
+`;
+
+/* Demos teach JavaScript by running it, but console output lands in the
+   browser's console where the reader never sees it. This mirrors each
+   console call into a panel inside the frame, so `console.log` in a demo
+   reads exactly like it does in a terminal. */
+const DEMO_CONSOLE_JS = `
+(function () {
+  var panel = null;
+  function ensurePanel() {
+    if (!panel) {
+      panel = document.createElement('div');
+      panel.className = 'demo-console';
+      var label = document.createElement('span');
+      label.className = 'demo-console-label';
+      label.textContent = 'Console';
+      panel.appendChild(label);
+      (document.body || document.documentElement).appendChild(panel);
+    } else if (panel.parentNode !== document.body && document.body) {
+      document.body.appendChild(panel);
+    }
+    return panel;
+  }
+  function format(value) {
+    if (typeof value === 'string') return value;
+    if (typeof value === 'undefined') return 'undefined';
+    if (value === null) return 'null';
+    // JSON.stringify turns NaN and Infinity into "null", which would quietly
+    // misreport exactly the values a JS chapter is trying to demonstrate.
+    if (typeof value !== 'object') return String(value);
+    if (typeof value === 'function') return value.toString().split('\\n')[0];
+    try { return JSON.stringify(value); } catch (e) { return String(value); }
+  }
+  function write(kind, args) {
+    var line = document.createElement('span');
+    line.className = 'demo-console-line' + (kind === 'log' ? '' : ' is-' + kind);
+    line.textContent = Array.prototype.map.call(args, format).join(' ');
+    ensurePanel().appendChild(line);
+    if (window.parent !== window) {
+      try { window.parent.postMessage({ demoFrameGrew: true }, '*'); } catch (e) {}
+    }
+  }
+  ['log', 'info', 'warn', 'error'].forEach(function (name) {
+    var original = console[name];
+    console[name] = function () {
+      write(name === 'info' ? 'log' : name, arguments);
+      try { original.apply(console, arguments); } catch (e) {}
+    };
+  });
+  window.addEventListener('error', function (event) {
+    write('error', ['Uncaught ' + (event.error ? event.error : event.message)]);
+  });
+})();
 `;
 
 function buildDemoDocument(source) {
@@ -373,7 +466,7 @@ function buildDemoDocument(source) {
   const rtl = /[֐-׿]/.test(source);
   return `<!DOCTYPE html>
 <html lang="${rtl ? 'he' : 'en'}" dir="${rtl ? 'rtl' : 'ltr'}">
-<head><meta charset="utf-8"><style>${DEMO_FRAME_CSS}</style></head>
+<head><meta charset="utf-8"><style>${DEMO_FRAME_CSS}</style><script>${DEMO_CONSOLE_JS}<\/script></head>
 <body>
 ${source}
 </body>
@@ -398,9 +491,22 @@ function enhanceDemos(root) {
     const pre = code.parentElement;
     const source = code.textContent;
 
-    // The source is HTML, so label and highlight it as HTML.
+    // A demo is an HTML fragment, but JavaScript chapters write demos that are
+    // nothing but a <script> block. Labelling those "HTML" would misdescribe
+    // every example in the section, so they are labelled and highlighted as JS.
+    // Anchored AND single-block: a demo that mixes markup between two script
+    // blocks would otherwise match greedily and get mangled.
+    const scriptOnly = /^\s*<script>[\s\S]*<\/script>\s*$/i.test(source)
+      && (source.match(/<script\b/gi) || []).length === 1;
+    const demoLang = scriptOnly ? 'js' : 'html';
+
     code.classList.remove('language-demo');
-    code.classList.add('language-html');
+    code.classList.add(`language-${demoLang}`);
+    if (scriptOnly) {
+      // Show (and copy) the JavaScript itself, without the wrapping <script> tags.
+      code.textContent = source.replace(/^\s*<script>\n?/i, '').replace(/<\/script>\s*$/i, '').replace(/\s+$/, '');
+    }
+    const copyText = scriptOnly ? code.textContent : source;
     try { hljs.highlightElement(code); } catch {}
 
     const demo = document.createElement('div');
@@ -413,7 +519,7 @@ function enhanceDemos(root) {
       </div>
       <div class="demo-pane demo-code">
         <div class="demo-label">
-          <span>HTML</span>
+          <span>${demoLang.toUpperCase()}</span>
           <button class="copy-code" type="button">Copy</button>
         </div>
         <div class="code-shell"></div>
@@ -425,7 +531,7 @@ function enhanceDemos(root) {
 
     demo.querySelector('.copy-code').addEventListener('click', async (e) => {
       try {
-        await navigator.clipboard.writeText(source);
+        await navigator.clipboard.writeText(copyText);
         e.currentTarget.textContent = 'Copied';
         setTimeout(() => { e.currentTarget.textContent = 'Copy'; }, 1100);
       } catch {}
@@ -443,6 +549,16 @@ function enhanceDemos(root) {
     const onResize = () => sizeDemoFrame(frame);
     window.addEventListener('resize', onResize);
     state.cleanup.push(() => window.removeEventListener('resize', onResize));
+
+    // A demo that logs after load (a timer, a promise) grows its own console
+    // panel, so it asks us to re-measure rather than waiting for a resize.
+    const onFrameGrew = event => {
+      if (event.source === frame.contentWindow && event.data && event.data.demoFrameGrew) {
+        sizeDemoFrame(frame);
+      }
+    };
+    window.addEventListener('message', onFrameGrew);
+    state.cleanup.push(() => window.removeEventListener('message', onFrameGrew));
   });
 }
 
