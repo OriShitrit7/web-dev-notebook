@@ -7,7 +7,7 @@
 <strong>המרת טיפוסים אוטומטית</strong>.
 </p>
 
-## אופרטורים חשבוניים
+## אופרטורים חשבוניים — Arithmetic Operators
 
 | אופרטור | פעולה |
 | --- | --- |
@@ -35,7 +35,7 @@
   </div>
 </div>
 
-## אופרטורי השמה
+## אופרטורי השמה — Assignment Operators
 
 <div class="box">
   <div class="box-body">
@@ -50,7 +50,7 @@
   </div>
 </div>
 
-## החיבור שמתנהג כמו שרשור
+## שרשור מחרוזות — String Operators
 
 <div class="box warn">
   <div class="box-head"><span class="icon">🧲</span>הסימן + הוא שני אופרטורים שונים</div>
@@ -96,7 +96,7 @@
   </div>
 </div>
 
-## השוואה
+## מנגנון ההשוואה — Comparison Operators
 
 | אופרטור | בודק |
 | --- | --- |
@@ -106,14 +106,19 @@
 | `!=` / `!==` | הגרסאות ההפוכות |
 
 <div class="box theory">
-  <div class="box-head"><span class="icon">⚖️</span>== מול ===</div>
+  <div class="box-head"><span class="icon">⚖️</span>מנגנון ההשוואה (Equality)</div>
   <div class="box-body">
-    <p>
-      זו ההבחנה החשובה ביותר בפרק:
-    </p>
     <ul>
-      <li><strong><code>==</code></strong> — לפני ההשוואה הוא <strong>ממיר</strong> את הערכים לאותו טיפוס, ורק אז משווה. אלגוריתם ההמרה סבוך ולא תמיד צפוי.</li>
-      <li><strong><code>===</code></strong> — בודק <strong>קודם את הטיפוס</strong>. אם הטיפוסים שונים, התשובה <code>false</code> מיד.</li>
+      <li>
+        <strong><code>==</code> (Equality):</strong> משווה בין ערכים לאחר המרה אוטומטית
+        של טיפוסים (למשל, המחרוזת <code>"4"</code> תהיה שווה למספר <code>4</code>).
+        אלגוריתם ההמרה סבוך ולא תמיד צפוי.
+      </li>
+      <li>
+        <strong><code>===</code> (Strict Equality):</strong> השוואה קשיחה. בודק גם את
+        הטיפוס וגם את הערך. אם הטיפוסים שונים, התשובה <code>false</code> מיד.
+        <strong>מומלץ לשימוש כברירת מחדל</strong> למניעת באגים.
+      </li>
     </ul>
   </div>
 </div>
@@ -150,7 +155,7 @@
   </div>
 </div>
 
-## אופרטורים לוגיים
+## אופרטורים לוגיים — Logical Operators
 
 | אופרטור | משמעות |
 | --- | --- |
@@ -159,7 +164,7 @@
 | `!` | היפוך |
 
 <div class="box theory">
-  <div class="box-head"><span class="icon">⚡</span>הערכה עצלה</div>
+  <div class="box-head"><span class="icon">⚡</span>Short-circuit</div>
   <div class="box-body">
     <p>
       שני האופרטורים האלה <strong>עוצרים ברגע שהתשובה ידועה</strong>,
@@ -235,7 +240,7 @@
 </script>
 ```
 
-## האופרטור התנאי
+## האופרטור התנאי — Ternary Operator
 
 <div class="box">
   <div class="box-body">
@@ -256,6 +261,242 @@
   const age = 20;
   const status = age >= 18 ? "adult" : "minor";
   console.log(status);
+</script>
+```
+
+## אופרטורים אונריים — Unary Operators
+
+<div class="box theory">
+  <div class="box-head"><span class="icon">☝️</span>אופרנד אחד בלבד</div>
+  <div class="box-body">
+    <p>
+      אופרטור אונרי פועל על <strong>ערך יחיד</strong>, ולא על שניים:
+    </p>
+    <ul>
+      <li><strong><code>+</code></strong> — <strong>ממיר למספר</strong>. <code>+"5"</code> הוא המספר 5.</li>
+      <li><strong><code>-</code></strong> — הופך סימן, וגם הוא ממיר למספר.</li>
+      <li><strong><code>++</code> / <code>--</code></strong> — הגדלה והקטנה ב־1.</li>
+      <li><strong><code>!</code></strong> — היפוך בוליאני.</li>
+      <li><strong><code>typeof</code></strong> — מחזיר את שם הטיפוס.</li>
+      <li><strong><code>delete</code></strong> — מוחק שדה מאובייקט.</li>
+    </ul>
+    <p class="note-line">
+      ה־<code>+</code> האונרי הוא קיצור שימושי להמרת קלט ממשתמש —
+      בדיוק הבעיה שנפגוש בפרק User Input &amp; Forms.
+    </p>
+  </div>
+</div>
+
+```demo
+<script>
+  console.log(+"5" + 1);
+  console.log(-"5");
+  console.log(!true, !0);
+  console.log(typeof 45);
+
+  let n = 5;
+  console.log(n++, n);
+  console.log(++n, n);
+
+  const user = { name: "Ori", temp: 1 };
+  delete user.temp;
+  console.log(user);
+</script>
+```
+
+<div class="box warn">
+  <div class="box-head"><span class="icon">↔️</span>n++ מול ++n</div>
+  <div class="box-body">
+    <p>
+      שניהם מגדילים ב־1, אבל <strong>מחזירים ערך שונה</strong>:
+      <code>n++</code> מחזיר את הערך <strong>לפני</strong> ההגדלה,
+      ו־<code>++n</code> את הערך <strong>אחרי</strong>.
+    </p>
+    <p class="note-line">
+      בפאנל רואים את זה: <code>n++</code> הדפיס 5 בזמן ש־<code>n</code>
+      כבר היה 6. כשהערך המוחזר לא מעניין — בלולאה למשל — אין שום הבדל.
+    </p>
+  </div>
+</div>
+
+## אופרטורי יחס — Relational Operators
+
+<div class="box">
+  <div class="box-body">
+    <ul>
+      <li><strong><code>in</code></strong> — האם <strong>מפתח קיים</strong> באובייקט.</li>
+      <li><strong><code>instanceof</code></strong> — האם ערך נוצר מסוג מסוים.</li>
+    </ul>
+    <p class="note-line">
+      <code>instanceof</code> עובד על <strong>אובייקטים</strong>, ולכן
+      <code>"hi" instanceof String</code> הוא <code>false</code> —
+      מחרוזת רגילה היא ערך פרימיטיבי ולא אובייקט.
+    </p>
+  </div>
+</div>
+
+```demo
+<script>
+  const user = { name: "Ori" };
+
+  console.log("name" in user);
+  console.log("age" in user);
+
+  console.log([] instanceof Array);
+  console.log({} instanceof Object);
+  console.log("hi" instanceof String);
+
+  console.log(Array.isArray([]));
+</script>
+```
+
+<div class="box">
+  <div class="box-body">
+    <p class="note-line">
+      לבדיקה אם ערך הוא מערך <strong>מעדיפים <code>Array.isArray()</code></strong>
+      על פני <code>instanceof</code>, כי הוא עובד נכון גם כשהמערך הגיע
+      מהקשר אחר — למשל מתוך <code>&lt;iframe&gt;</code>.
+    </p>
+  </div>
+</div>
+
+## שרשור אופציונלי — Optional Chaining
+
+<div class="box theory">
+  <div class="box-head"><span class="icon">🔗</span>האופרטור ‎?.‎</div>
+  <div class="box-body">
+    <p>
+      גישה לשדה מקונן שלא קיים <strong>מפילה את הסקריפט</strong>:
+      אם <code>obj.contact</code> הוא <code>undefined</code>, אז
+      <code>obj.contact.phone</code> זורק שגיאה.
+    </p>
+    <p>
+      <code>?.</code> פותר את זה: אם החלק שלפניו הוא <code>null</code>
+      או <code>undefined</code>, כל הביטוי <strong>מחזיר
+      <code>undefined</code></strong> במקום לזרוק שגיאה.
+    </p>
+  </div>
+</div>
+
+```demo
+<script>
+  const obj = { name: "Aman", address: { city: "Delhi" } };
+
+  console.log(obj.address?.city);
+  console.log(obj.contact?.phone);
+
+  try {
+    console.log(obj.contact.phone);
+  } catch (error) {
+    console.log("without ?. →", error.message);
+  }
+</script>
+```
+
+<div class="box example">
+  <div class="box-head"><span class="icon">🧰</span>שלוש צורות</div>
+  <div class="box-body">
+    <ul>
+      <li><strong><code>obj?.prop</code></strong> — שדה.</li>
+      <li><strong><code>obj?.[key]</code></strong> — שדה לפי משתנה.</li>
+      <li><strong><code>obj.method?.()</code></strong> — קריאה לפונקציה רק אם היא קיימת.</li>
+    </ul>
+    <p class="note-line">
+      משלבים אותו מצוין עם <code>??</code>:
+      <code>user.address?.city ?? "unknown"</code> — קח את העיר אם יש,
+      ואחרת ערך ברירת מחדל.
+    </p>
+  </div>
+</div>
+
+<div class="box warn">
+  <div class="box-head"><span class="icon">⚠️</span>לא להשתמש בו בכל מקום</div>
+  <div class="box-body">
+    <p>
+      <code>?.</code> נועד למקומות שבהם השדה <strong>באמת עשוי לא להתקיים</strong> —
+      תשובה משרת, הגדרה אופציונלית. פיזור שלו על כל גישה
+      <strong>מסתיר באגים</strong>: במקום שגיאה ברורה מקבלים
+      <code>undefined</code> שממשיך לזרום הלאה.
+    </p>
+  </div>
+</div>
+
+## אופרטורי סיביות — Bitwise Operators
+
+<div class="box">
+  <div class="box-body">
+    <p>
+      פועלים על הייצוג <strong>הבינארי</strong> של המספר, סיבית אחר סיבית.
+    </p>
+  </div>
+</div>
+
+| אופרטור | שם | פעולה |
+| --- | --- | --- |
+| `&` | AND | 1 רק אם **בשתיהן** 1 |
+| `\|` | OR | 1 אם **לפחות באחת** 1 |
+| `^` | XOR | 1 אם **בדיוק באחת** 1 |
+| `~` | NOT | הופך כל סיבית |
+| `<<` | Left shift | הזזה שמאלה |
+| `>>` | Right shift | הזזה ימינה, עם סימן |
+| `>>>` | Zero-fill right shift | הזזה ימינה, בלי סימן |
+
+```demo
+<script>
+  console.log(5 & 3);
+  console.log(5 | 3);
+  console.log(5 ^ 3);
+  console.log(5 << 1);
+  console.log(5 >> 1);
+</script>
+```
+
+<div class="box">
+  <div class="box-body">
+    <p class="note-line">
+      בפיתוח web כמעט לא משתמשים בהם. הם מופיעים בעיקר בגרפיקה,
+      בהצפנה ובדגלי הרשאות. כדאי <strong>לזהות</strong> אותם —
+      ובעיקר לא לבלבל בין <code>&</code> ל־<code>&&</code>
+      ובין <code>|</code> ל־<code>||</code>, שהם אופרטורים שונים לגמרי.
+    </p>
+  </div>
+</div>
+
+## שניים שכדאי רק להכיר — Comma &amp; BigInt
+
+<div class="box">
+  <div class="box-body">
+    <p>
+      <strong>אופרטור הפסיק (Comma)</strong> מריץ כמה ביטויים ברצף
+      ומחזיר את <strong>האחרון</strong>. כמעט לא בשימוש, פרט לחלק
+      האתחול של לולאת <code>for</code>.
+    </p>
+    <p>
+      <strong>BigInt</strong> הוא טיפוס למספרים שלמים <strong>גדולים מאוד</strong>,
+      מעבר לגבול הבטוח של <code>number</code>. כותבים אותו עם
+      <code>n</code> בסוף: <code>123n</code>.
+    </p>
+    <p class="note-line">
+      <strong>אי אפשר לערבב</strong> BigInt עם <code>number</code> באותה
+      פעולה חשבונית — זו שגיאה.
+    </p>
+  </div>
+</div>
+
+```demo
+<script>
+  const result = (1 + 2, 10 + 20);
+  console.log(result);
+
+  const big = 9007199254740991n;
+  console.log(big + 1n);
+  console.log(typeof big);
+
+  try {
+    console.log(big + 1);
+  } catch (error) {
+    console.log("mixing failed →", error.message);
+  }
 </script>
 ```
 
@@ -329,6 +570,10 @@
       <li><strong>הנחה שמערך ריק הוא שקרי</strong> — <code>[]</code> הוא <strong>truthy</strong>.</li>
       <li><strong><code>||</code> כשאפס הוא ערך תקין</strong> — הוא ידרוס אותו. צריך <code>??</code>.</li>
       <li><strong><code>=</code> במקום <code>===</code> בתנאי</strong> — זו השמה, והיא כמעט תמיד תיתן אמת.</li>
+      <li><strong>בלבול בין <code>&amp;</code> ל־<code>&amp;&amp;</code></strong> — הראשון פועל על סיביות, השני על תנאים.</li>
+      <li><strong>פיזור <code>?.</code> על כל גישה</strong> — מסתיר באגים במקום לחשוף אותם.</li>
+      <li><strong>ערבוב BigInt עם <code>number</code></strong> — זורק שגיאה.</li>
+      <li><strong><code>"hi" instanceof String</code></strong> — <code>false</code>, כי מחרוזת רגילה אינה אובייקט.</li>
     </ul>
   </div>
 </div>
@@ -347,6 +592,11 @@
       <li>שישה ערכים שקריים: <code>false</code>, <code>0</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>. <strong>כל השאר אמיתי.</strong></li>
       <li><code>??</code> מחליף <strong>רק</strong> <code>null</code> ו־<code>undefined</code> — בניגוד ל־<code>||</code>.</li>
       <li><code>condition ? a : b</code> לבחירה קצרה בין שני ערכים.</li>
+      <li><strong>אונריים:</strong> <code>+</code> ממיר למספר, <code>n++</code> מחזיר <strong>לפני</strong> ההגדלה ו־<code>++n</code> אחריה.</li>
+      <li><strong>יחס:</strong> <code>in</code> לקיום מפתח, <code>instanceof</code> לסוג — ולמערך עדיף <code>Array.isArray()</code>.</li>
+      <li><strong><code>?.</code></strong> מחזיר <code>undefined</code> במקום לזרוק שגיאה, ומשתלב יפה עם <code>??</code>.</li>
+      <li><strong>סיביות</strong> נדירים ב־web; העיקר לא לבלבל <code>&amp;</code> עם <code>&amp;&amp;</code>.</li>
+      <li><strong>פסיק</strong> מחזיר את הביטוי האחרון; <strong>BigInt</strong> נכתב עם <code>n</code> ו<strong>אינו מתערבב</strong> עם <code>number</code>.</li>
       <li><code>0.1 + 0.2</code> אינו <code>0.3</code>, ו־<code>NaN</code> <strong>אינו שווה לעצמו</strong>.</li>
     </ul>
   </div>
