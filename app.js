@@ -386,6 +386,10 @@ const DEMO_FRAME_CSS = `
     background: #0f172a;
     color: #e2e8f0;
     font-family: 'JetBrains Mono', 'SF Mono', 'Courier New', monospace;
+    /* Same reason as in styles.css: ligatures fuse == and === into glyphs
+       that cannot be told apart. */
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "clig" 0, "calt" 0;
     font-size: 13px;
     line-height: 1.7;
     direction: ltr;

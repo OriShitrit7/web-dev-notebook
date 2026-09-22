@@ -59,6 +59,29 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* JetBrains Mono ships with coding ligatures: `==` is drawn as one fused glyph
+   and `===` as another, and `!=` collapses into a single ≠. In the JavaScript
+   chapters that makes the equality operators impossible to tell apart — which
+   is precisely what those chapters are teaching. Every place the mono font is
+   used therefore opts out of ligatures. */
+code,
+pre,
+kbd,
+.term,
+.brand-meta,
+.nav-num,
+.card-num,
+.code-label,
+.copy-code,
+.demo-label,
+.quiz-num,
+.quiz-score,
+.search-result small,
+.markdown-body th.num {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "calt" 0;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 84px;
