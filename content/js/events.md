@@ -115,6 +115,37 @@
   </div>
 </div>
 
+<div class="box example">
+  <div class="box-head"><span class="icon">🎯</span>matches — לבדוק על מה בדיוק לחצו</div>
+  <div class="box-body">
+    <p>
+      ל־<code>event.target</code> מצטרפת מתודה שימושית במיוחד:
+      <strong><code>el.matches("css")</code></strong> מחזירה
+      <code>true</code> אם האלמנט <strong>תואם לבורר CSS</strong>.
+    </p>
+    <p class="note-line">
+      ההבדל מ־<code>closest()</code>: <code>matches</code> בודקת את האלמנט
+      <strong>עצמו בלבד</strong> ומחזירה בוליאני, ואילו <code>closest</code>
+      <strong>מטפסת במעלה העץ</strong> ומחזירה אלמנט.
+    </p>
+  </div>
+</div>
+
+```demo
+<div id="bar" style="font-family:system-ui">
+  <button class="danger">Delete</button>
+  <button>Cancel</button>
+  <span>not a button</span>
+</div>
+<script>
+  document.getElementById("bar").addEventListener("click", (e) => {
+    console.log("tag:", e.target.tagName);
+    console.log("is a button?", e.target.matches("button"));
+    console.log("is a danger button?", e.target.matches("button.danger"));
+  });
+</script>
+```
+
 ## בועות
 
 <div class="box theory">
@@ -184,6 +215,70 @@
     <p class="note-line">
       לחצי על ״Add item״ ואז על הפריט החדש. הוא נוצר <strong>אחרי</strong>
       שהמאזין חובר, ובכל זאת הלחיצה עליו נתפסת — כי המאזין יושב על ההורה.
+    </p>
+  </div>
+</div>
+
+### להכליל את התבנית
+
+<div class="box example">
+  <div class="box-head"><span class="icon">🧰</span>מאזין גלובלי אחד</div>
+  <div class="box-body">
+    <p>
+      אם כותבים delegation בכמה מקומות, אותן שלוש שורות חוזרות שוב ושוב:
+      להאזין, לבדוק שהלחיצה נפלה על הדבר הנכון, ורק אז לפעול.
+      אפשר לעטוף את זה <strong>בפונקציה אחת</strong>:
+    </p>
+  </div>
+</div>
+
+```demo
+<style>
+  .box { display: inline-block; width: 70px; height: 70px; margin: 6px;
+         background: #cbd5e1; border-radius: 8px; cursor: pointer; }
+  .box.clicked { background: #4f46e5; }
+</style>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<script>
+  function addGlobalEventListener(type, selector, callback) {
+    document.addEventListener(type, (e) => {
+      if (e.target.matches(selector)) {
+        callback(e);
+      }
+    });
+  }
+
+  addGlobalEventListener("click", ".box", (e) => {
+    e.target.classList.toggle("clicked");
+    console.log("toggled a box");
+  });
+</script>
+```
+
+<div class="box">
+  <div class="box-body">
+    <p class="note-line">
+      לחצי על הריבועים. המאזין יושב על <code>document</code> <strong>אחד בלבד</strong>,
+      ו־<code>matches</code> מסנן אותו לבורר שביקשנו. הפונקציה מקבלת
+      <strong>סוג אירוע, בורר ו־callback</strong> — ומכאן והלאה כל delegation
+      הוא שורה אחת.
+    </p>
+  </div>
+</div>
+
+<div class="box warn">
+  <div class="box-head"><span class="icon">⚠️</span>מתי matches לבדו לא מספיק</div>
+  <div class="box-body">
+    <p>
+      <code>e.target</code> הוא האלמנט <strong>המדויק</strong> שנלחץ.
+      אם לכפתור יש אייקון או <code>&lt;span&gt;</code> בפנים, הלחיצה תיפול
+      על הילד — ו־<code>matches("button")</code> יחזיר <code>false</code>.
+    </p>
+    <p class="note-line">
+      לכן בגרסה עמידה יותר משתמשים ב־<code>e.target.closest(selector)</code>
+      במקום ב־<code>matches</code>, בדיוק כפי שעשינו בדמו הקודם.
     </p>
   </div>
 </div>
@@ -258,6 +353,90 @@
   </div>
 </div>
 
+## הפרמטר השלישי — options
+
+<div class="box theory">
+  <div class="box-head"><span class="icon">⚙️</span>מה עוד אפשר לבקש</div>
+  <div class="box-body">
+    <p>
+      ל־<code>addEventListener</code> יש פרמטר שלישי אופציונלי —
+      אובייקט הגדרות שמשנה <strong>איך</strong> המאזין מתנהג:
+    </p>
+    <p><code>el.addEventListener("click", handler, { once: true })</code></p>
+  </div>
+</div>
+
+| אפשרות | מה היא עושה |
+| --- | --- |
+| `once: true` | המאזין רץ **פעם אחת** ואז מסיר את עצמו |
+| `capture: true` | תופס את האירוע **בדרך למטה**, לפני הבועה |
+| `passive: true` | מבטיח שלא תקראי ל־`preventDefault` — משפר ביצועי גלילה |
+| `signal` | מאפשר לבטל את המאזין דרך `AbortController` |
+
+```demo
+<button id="once" style="font-family:system-ui">Runs once</button>
+<button id="many" style="font-family:system-ui">Runs every time</button>
+<script>
+  document.getElementById("once").addEventListener("click", () => {
+    console.log("once — you will see this a single time");
+  }, { once: true });
+
+  document.getElementById("many").addEventListener("click", () => {
+    console.log("normal — every click logs");
+  });
+</script>
+```
+
+<div class="box">
+  <div class="box-body">
+    <p class="note-line">
+      לחצי על שני הכפתורים כמה פעמים. הראשון ידווח פעם אחת בלבד,
+      כי <code>once</code> הסיר אותו אחרי ההפעלה הראשונה —
+      בלי שנצטרך <code>removeEventListener</code>.
+    </p>
+  </div>
+</div>
+
+<div class="box example">
+  <div class="box-head"><span class="icon">⬇️</span>capture — השלב שלפני הבועה</div>
+  <div class="box-body">
+    <p>
+      לאירוע יש למעשה <strong>שני שלבים</strong>: קודם הוא יורד
+      מ־<code>document</code> אל האלמנט (<em>capture</em>), ורק אז
+      עולה חזרה (<em>bubble</em>). ברירת המחדל היא להאזין
+      <strong>בעלייה</strong>.
+    </p>
+    <p class="note-line">
+      <code>capture: true</code> מזיז את המאזין לשלב הירידה,
+      כך שהורה שומע <strong>לפני</strong> הילד. בפועל משתמשים בזה לעיתים רחוקות.
+    </p>
+  </div>
+</div>
+
+```demo
+<div id="outer" style="padding:14px;background:#eef2ff;font-family:system-ui">
+  outer
+  <button id="inner">inner</button>
+</div>
+<script>
+  const outer = document.getElementById("outer");
+
+  outer.addEventListener("click", () => console.log("outer — bubble (default)"));
+  outer.addEventListener("click", () => console.log("outer — CAPTURE"), { capture: true });
+  document.getElementById("inner").addEventListener("click", () => console.log("inner"));
+</script>
+```
+
+<div class="box">
+  <div class="box-body">
+    <p class="note-line">
+      לחצי על הכפתור הפנימי. הסדר בפאנל הוא
+      <strong>CAPTURE → inner → bubble</strong>, למרות ששני המאזינים
+      של <code>outer</code> נרשמו על אותו אלמנט. זה השלב שקובע, לא סדר הכתיבה.
+    </p>
+  </div>
+</div>
+
 ## הסרת מאזין
 
 <div class="box">
@@ -305,6 +484,8 @@
       <li><strong>שכחת <code>preventDefault</code> בטופס</strong> — הדף ייטען מחדש והקוד ״ייעלם״.</li>
       <li><strong>ניסיון להסיר מאזין אנונימי</strong> — חייבים הפניה לאותה פונקציה.</li>
       <li><strong><code>stopPropagation</code> במקום <code>preventDefault</code></strong> — שתי פעולות שונות לגמרי.</li>
+      <li><strong><code>matches</code> על כפתור עם אייקון בפנים</strong> — <code>target</code> הוא הילד, ולכן עדיף <code>closest</code>.</li>
+      <li><strong><code>preventDefault</code> בתוך מאזין <code>passive</code></strong> — הדפדפן יתעלם ויזהיר ב־Console.</li>
     </ul>
   </div>
 </div>
@@ -323,6 +504,10 @@
       <li><code>stopPropagation</code> עוצר את <strong>הבועה</strong>. אלה דברים שונים.</li>
       <li><code>input</code> בכל תו; <code>change</code> בסיום.</li>
       <li>אי אפשר להסיר מאזין אנונימי — צריך הפניה לפונקציה.</li>
+      <li><strong><code>el.matches("css")</code></strong> בודקת את האלמנט עצמו; <code>closest</code> מטפסת למעלה.</li>
+      <li>אפשר לעטוף delegation ב<strong>פונקציה גנרית אחת</strong> שמקבלת סוג אירוע, בורר ו־callback.</li>
+      <li><strong>פרמטר שלישי — <code>options</code></strong>: <code>once</code>, <code>capture</code>, <code>passive</code>, <code>signal</code>.</li>
+      <li>לאירוע יש שלב <strong>capture</strong> (ירידה) ושלב <strong>bubble</strong> (עלייה); ברירת המחדל היא בעלייה.</li>
       <li><code>addEventListener</code> עדיף על <code>onclick</code> ב־HTML.</li>
     </ul>
   </div>

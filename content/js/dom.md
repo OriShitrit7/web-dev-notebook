@@ -57,6 +57,38 @@
   </div>
 </div>
 
+<div class="figure">
+  <svg viewBox="0 0 560 240" width="560" role="img" aria-label="תרשים: document בראש העץ, מתחתיו documentElement שהוא html, ומתחתיו head ו־body">
+    <g fill="none" stroke="#a8a29e" stroke-width="1.6">
+      <path d="M280,52 V78" />
+      <path d="M274,70 L280,82 L286,70" />
+      <path d="M240,124 L150,156" />
+      <path d="M156,144 L144,158 L162,160" />
+      <path d="M320,124 L410,156" />
+      <path d="M398,160 L416,158 L404,144" />
+    </g>
+    <rect x="205" y="18" width="150" height="34" rx="5" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.6" />
+    <rect x="150" y="90" width="260" height="34" rx="5" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.6" />
+    <rect x="42" y="162" width="200" height="34" rx="5" fill="#fff" stroke="#cbd5e1" stroke-width="1.6" />
+    <rect x="318" y="162" width="200" height="34" rx="5" fill="#fff" stroke="#cbd5e1" stroke-width="1.6" />
+    <g font-family="'JetBrains Mono', monospace" font-size="13" text-anchor="middle" fill="#312e81">
+      <text x="280" y="40">document</text>
+      <text x="280" y="112">document.documentElement</text>
+      <text x="142" y="184">document.head</text>
+      <text x="418" y="184">document.body</text>
+    </g>
+    <g font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" fill="#7c3aed">
+      <text x="452" y="112">&lt;html&gt;</text>
+      <text x="142" y="216">&lt;head&gt;</text>
+      <text x="418" y="216">&lt;body&gt;</text>
+    </g>
+  </svg>
+  <div class="cap">
+    <code>document</code> אינו האלמנט <code>&lt;html&gt;</code> אלא המסמך שמעליו.
+    ל־<code>&lt;head&gt;</code> ול־<code>&lt;body&gt;</code> יש קיצורים ישירים.
+  </div>
+</div>
+
 ## בחירת אלמנטים
 
 <div class="box theory">
@@ -99,6 +131,37 @@
     </p>
   </div>
 </div>
+
+<div class="box example">
+  <div class="box-head"><span class="icon">🪝</span>בחירה לפי attribute</div>
+  <div class="box-body">
+    <p>
+      מכיוון שאלה בוררי CSS, גם <strong>בוררי ה־attribute</strong> מפרק
+      Advanced Selectors עובדים — והסוגריים המרובעים אומרים
+      <strong>חיפוש לפי attribute</strong>:
+    </p>
+    <p><code>document.querySelector("[data-add-box]")</code></p>
+    <p>
+      כלומר: ״מצא את האלמנט הראשון שיש לו <code>data-add-box</code>״.
+    </p>
+    <p class="note-line">
+      זה הדפוס המקובל לחיבור בין HTML ל־JavaScript: <code>class</code>
+      נשאר לעיצוב, ו־<code>data-*</code> משמש כ<strong>וו אחיזה</strong> לקוד.
+      כך שינוי עיצובי לא שובר את הסקריפט, ולהפך.
+    </p>
+  </div>
+</div>
+
+```demo
+<button data-add-box class="btn primary">Add</button>
+<button class="btn">Other</button>
+<script>
+  const addButton = document.querySelector("[data-add-box]");
+  console.log(addButton.textContent);
+  console.log(document.querySelectorAll("[data-add-box]").length);
+  console.log(document.querySelectorAll("button").length);
+</script>
+```
 
 <div class="box warn">
   <div class="box-head"><span class="icon">⚠️</span>השגיאה מספר אחת ב־DOM</div>
@@ -191,6 +254,50 @@
 
 ## תנועה בעץ
 
+<div class="figure">
+  <svg viewBox="0 0 760 330" width="760" role="img" aria-label="תרשים: היחסים בעץ מכל אלמנט — הורה, אחים וילדים, עם שם גרסת ה־Node ושם גרסת ה־Element לכל כיוון">
+    <g fill="none" stroke="#a8a29e" stroke-width="1.6">
+      <path d="M380,130 V84" />
+      <path d="M374,92 L380,80 L386,92" />
+      <path d="M308,151 H182" />
+      <path d="M190,145 L178,151 L190,157" />
+      <path d="M452,151 H578" />
+      <path d="M570,145 L582,151 L570,157" />
+      <path d="M348,172 L258,250" />
+      <path d="M262,236 L254,254 L272,250" />
+      <path d="M412,172 L502,250" />
+      <path d="M488,250 L506,254 L498,236" />
+    </g>
+    <rect x="310" y="132" width="140" height="38" rx="5" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.6" />
+    <g font-family="'JetBrains Mono', monospace" font-size="14" text-anchor="middle">
+      <text x="380" y="156" fill="#312e81">node &lt;DIV&gt;</text>
+    </g>
+    <g font-family="'JetBrains Mono', monospace" font-size="12.5" text-anchor="middle">
+      <text x="380" y="50" fill="#6b6b70">parentNode</text>
+      <text x="380" y="68" fill="#4f46e5" font-weight="700">parentElement</text>
+      <text x="380" y="196" fill="#6b6b70">childNodes</text>
+      <text x="380" y="214" fill="#4f46e5" font-weight="700">children</text>
+      <text x="228" y="278" fill="#6b6b70">firstChild</text>
+      <text x="228" y="296" fill="#4f46e5" font-weight="700">firstElementChild</text>
+      <text x="532" y="278" fill="#6b6b70">lastChild</text>
+      <text x="532" y="296" fill="#4f46e5" font-weight="700">lastElementChild</text>
+    </g>
+    <g font-family="'JetBrains Mono', monospace" font-size="12.5" text-anchor="end">
+      <text x="170" y="146" fill="#6b6b70">previousSibling</text>
+      <text x="170" y="164" fill="#4f46e5" font-weight="700">previousElementSibling</text>
+    </g>
+    <g font-family="'JetBrains Mono', monospace" font-size="12.5" text-anchor="start">
+      <text x="590" y="146" fill="#6b6b70">nextSibling</text>
+      <text x="590" y="164" fill="#4f46e5" font-weight="700">nextElementSibling</text>
+    </g>
+  </svg>
+  <div class="cap">
+    לכל כיוון יש <strong>שתי גרסאות</strong>: זו האפורה עובדת על
+    <strong>כל הצמתים</strong> — כולל צמתי טקסט — וזו הכחולה עובדת על
+    <strong>אלמנטים בלבד</strong>. כמעט תמיד רוצים את הכחולה.
+  </div>
+</div>
+
 <div class="box">
   <div class="box-body">
     <p>מכל אלמנט אפשר להגיע לשכניו בעץ:</p>
@@ -205,6 +312,10 @@
       שימי לב ל־<code>Element</code> בשמות. יש גם <code>childNodes</code>
       ו־<code>nextSibling</code>, אבל אלה כוללים גם <strong>צמתי טקסט</strong> —
       כולל הרווחים והשורות שבין התגיות. כמעט תמיד רוצים את גרסת ה־<code>Element</code>.
+    </p>
+    <p class="note-line">
+      ושתי תכונות קטנות שנוחות לבדיקה מהירה:
+      <code>hasChildNodes()</code> ו־<code>childElementCount</code>.
     </p>
   </div>
 </div>
